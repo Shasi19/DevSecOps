@@ -26,3 +26,26 @@ Create two feature branches from a shared base, make overlapping edits, resolve 
 ## Further reading
 
 [Pro Git book](https://git-scm.com/book/en/v2) · [Git reference](https://git-scm.com/docs)
+
+## Topic roadmap, examples, and recovery
+
+**Objects and refs:** blobs store file content, trees store directory structure, commits point to trees/parents, and annotated tags store metadata/signatures. Branches are refs, not copies of the whole repository. `git fetch` updates remote-tracking refs without integrating; `pull` fetches and integrates.
+
+**Example—undo a shared mistake:** use `git revert <commit>` to create an inverse commit. For local unshared edits, `git restore` can discard work and `git reset` can move a branch; inspect status/diff first. `reflog` can often locate a recently moved local ref, but is not a backup.
+
+**Conflict workflow:** inspect conflict markers and `git status`; compare each side and the merge base; edit to the intended combined behavior; run tests; stage resolved paths; complete merge/rebase. During rebase, `--ours`/`--theirs` perspective may surprise—inspect the actual commit sides before choosing.
+
+```mermaid
+gitGraph
+  commit id: "main"
+  branch feature
+  checkout feature
+  commit id: "feature change"
+  checkout main
+  commit id: "main change"
+  merge feature id: "merge"
+```
+
+**Troubleshooting:** `non-fast-forward` means remote history advanced—fetch, inspect divergence, then integrate. A secret committed but not pushed should be removed from history and rotated if real; if pushed, revoke/rotate immediately before considering history rewrite. `.gitignore` does not untrack a file already committed (`git rm --cached` does).
+
+**Revision:** fetch downloads refs; merge preserves branch topology; rebase replays commits and changes IDs; revert is history-safe undo; reset moves a ref; stash is temporary; reflog is local recovery, not remote backup.

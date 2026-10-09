@@ -23,3 +23,24 @@ Create a pipeline that builds once, scans the artifact, waits for a production a
 ## Further reading
 
 [Harness documentation](https://developer.harness.io/)
+
+## Topic roadmap and delivery flow
+
+**Building blocks:** pipeline contains stages and steps; service describes the application/artifact; environment describes deployment context; infrastructure definition identifies targets; connectors provide source/registry/cloud access; delegates execute tasks in reachable networks. Templates provide reuse but should be versioned and governed.
+
+```mermaid
+flowchart LR
+  SRC[Source] --> BUILD[Build + test]
+  BUILD --> SCAN[Security checks]
+  SCAN --> REG[Artifact registry]
+  REG --> STAGE[Staging deploy]
+  STAGE --> VERIFY[Health verification]
+  VERIFY --> GATE[Approval]
+  GATE --> PROD[Production deploy]
+```
+
+**Example:** build an image once, record its digest and provenance, scan it, deploy that digest to staging, verify metrics/health, then require approval before production. Keep build and deploy connectors distinct and narrowly authorized.
+
+**Troubleshooting:** step cannot reach target—delegate network/DNS/firewall and target endpoint; connector denied—identity, scope, token expiry, and target policy; pipeline hangs—timeouts, delegate capacity, and queue; deploy succeeds but app unhealthy—verify probe semantics and service-specific health, then use the rollback path.
+
+**Revision:** delegate is privileged execution infrastructure; connector grants access; approval does not replace technical verification; retries can duplicate side effects; artifact promotion should preserve immutable identity; template changes can impact many pipelines.

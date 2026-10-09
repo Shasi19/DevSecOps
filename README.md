@@ -1,6 +1,6 @@
 # DevSecOps study notes
 
-Original, practical study guides for the 27 products listed in the [DevOps Master Library package](https://topmate.io/abhishek_kumar_singh21/2181059). The package page describes topics, but does not expose the handbook PDFs. These notes are independently written learning material based on broadly documented concepts; they are not transcriptions, summaries, or a substitute for those handbooks.
+Original, practical study guides for the 27 products listed in the [DevOps Master Library package](https://topmate.io/abhishek_kumar_singh21/2181059), plus Oracle Cloud Infrastructure (OCI). The sales page describes products and broad learning areas, but does not expose individual handbook tables of contents or PDF contents. These guides therefore provide an independently written, broad curriculum—not a claim to reproduce or enumerate the unseen handbooks' exact chapters. If you have the handbooks and want notes mapped to their exact topics, provide their table of contents or authorized materials.
 
 ## Guides
 
@@ -8,6 +8,7 @@ Original, practical study guides for the 27 products listed in the [DevOps Maste
 - [AWS](notes/aws/)
 - [Microsoft Azure](notes/azure/)
 - [Google Cloud Platform](notes/gcp/)
+- [Oracle Cloud Infrastructure (OCI)](notes/oci/)
 
 ### Delivery, infrastructure, and operations
 - [Ansible](notes/ansible/)
@@ -41,4 +42,4 @@ Original, practical study guides for the 27 products listed in the [DevOps Maste
 - [Behavioural and system design interviews](notes/behavioural-system-design/)
 - [Managerial and SRE interviews](notes/managerial-sre-interviews/)
 
-Each guide is organized around core concepts, a practical workflow, security/reliability considerations, and exercises. Product features evolve; consult each project's official documentation for version-specific commands and behavior.
+Each guide covers a practical topic roadmap, examples, architecture/workflow diagrams (Mermaid), troubleshooting, production scenarios, and quick revision notes. Diagrams are original text-based illustrations and render in GitHub. Product features evolve; consult each project's official documentation for version-specific commands and behavior.

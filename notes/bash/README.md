@@ -33,3 +33,31 @@ Write a deployment wrapper that validates an environment, checks required tools,
 ## Further reading
 
 [GNU Bash manual](https://www.gnu.org/software/bash/manual/)
+
+## Topic roadmap and failure-safe example
+
+```mermaid
+flowchart LR
+  INPUT[Arguments + environment] --> VALIDATE[Validate / quote]
+  VALIDATE --> CMD[External command]
+  CMD --> STATUS[Check exit status]
+  STATUS -->|success| OUTPUT[stdout result]
+  STATUS -->|failure| ERROR[stderr + nonzero exit]
+  CLEANUP[trap] --> TEMP[Owned temp files]
+```
+
+**Shell behavior:** parameter expansion, command substitution, redirection, pipelines, globbing, functions, traps, and process substitution have different quoting and exit-status behavior. Use `"$@"` to forward arguments, arrays for command construction, and `read -r` to preserve backslashes. Use `printf` rather than portability-sensitive `echo`.
+
+```bash
+args=(--region "$region" --file "$input")
+if ! cloud-tool "${args[@]}"; then
+  printf 'deployment failed for region %s\n' "$region" >&2
+  exit 1
+fi
+```
+
+**Automation patterns:** validate inputs before side effects; use `mktemp` and a cleanup `trap`; use `flock` or an external lock for concurrent runs; add a timeout and bounded retry; make destructive actions support dry-run; quote paths and handle spaces/newlines safely. Avoid parsing `ls`; use `find -print0` with null-delimited reads.
+
+**Troubleshooting:** script appears to skip failures—inspect conditionals, command substitutions, pipelines, and `pipefail`; wrong arguments—check word splitting and quote expansion; temp files remain—check signal/exit traps and variable scope; hangs—identify child process and use bounded timeout.
+
+**Revision:** single quotes prevent expansion; double quotes preserve a single argument while allowing selected expansions; arrays preserve argument boundaries; `set -e` is not exception handling; `pipefail` exposes pipeline errors; never `eval` untrusted text; stdout is output, stderr is diagnostics.

@@ -23,3 +23,45 @@ Write a role that installs and configures a web server, validates the config, re
 ## Further reading
 
 [Ansible documentation](https://docs.ansible.com/)
+
+## Topic roadmap and playbook example
+
+```mermaid
+flowchart LR
+  INV[Inventory + variables] --> CTRL[Ansible controller]
+  PLAY[Playbook / role] --> CTRL
+  CTRL -->|SSH / WinRM| HOST[Managed host]
+  HOST --> MODULE[Module converges state]
+  MODULE --> CHANGE{Changed?}
+  CHANGE -->|yes| HANDLER[Handler + validation]
+  CHANGE -->|no| DONE[Idempotent no-op]
+```
+
+**Execution model:** controller loads inventory, variables, roles, and playbooks; tasks invoke modules on managed nodes; facts provide discovered host data; handlers run on notification. Precedence can make variables hard to reason about—keep sources explicit and avoid unnecessary overrides. Static/dynamic inventories should be reviewed as code.
+
+```yaml
+- hosts: web
+  become: true
+  tasks:
+    - name: Ensure web package is installed
+      ansible.builtin.package:
+        name: nginx
+        state: present
+    - name: Install validated configuration
+      ansible.builtin.template:
+        src: nginx.conf.j2
+        dest: /etc/nginx/nginx.conf
+        mode: "0644"
+      notify: Restart nginx after configuration change
+  handlers:
+    - name: Restart nginx after configuration change
+      ansible.builtin.service:
+      name: nginx
+      state: reloaded
+```
+
+Validate configuration before reload in real deployments (for example, with a module's `validate` option or an explicit validation task); use serial batches and health checks. Roles organize defaults, tasks, handlers, templates, files, and metadata. Collections are versioned dependencies; pin and review them.
+
+**Troubleshooting:** unreachable—SSH user/key, route, host-key and Python runtime; undefined variable—inventory/group precedence and spelling; task reports changed every run—use the correct module/state or command `creates`/`changed_when`; handler did not run—confirm task changed and handler name notification matches.
+
+**Revision:** inventory selects hosts; modules express state; playbooks orchestrate; roles package; handlers react to change; Vault protects at rest, not after decryption; check mode support is module-specific; idempotency must be verified by a second run.

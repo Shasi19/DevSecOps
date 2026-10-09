@@ -26,3 +26,35 @@ Create a small web service with a managed identity, private data access, central
 ## Further reading
 
 [Azure Well-Architected Framework](https://learn.microsoft.com/azure/well-architected/) · [Azure RBAC](https://learn.microsoft.com/azure/role-based-access-control/overview)
+
+## Topic roadmap and examples
+
+### Hierarchy, identity, and policy
+
+Management groups inherit governance across subscriptions; subscriptions define billing/quota and access scopes; resource groups group resource lifecycle. Azure RBAC combines a security principal, role definition, and scope. Managed identities avoid application-managed credentials. Azure Policy evaluates/enforces configuration; a policy assignment does not replace RBAC.
+
+### Network and application path
+
+```mermaid
+flowchart LR
+  C[Client] --> FD[Front Door / DNS]
+  FD --> WAF[Application Gateway + WAF]
+  WAF --> APP[App Service or private workload]
+  APP --> PE[Private Endpoint]
+  PE --> DB[(Managed database)]
+  APP --> MON[Azure Monitor]
+```
+
+Use NSGs for subnet/NIC traffic filtering, private endpoints for private service access, and DNS zones to resolve private service names correctly. Validate the complete DNS, route, firewall, and identity path.
+
+### Compute, data, and delivery
+
+Compare VMs, App Service, Functions, AKS, Blob Storage, and managed databases by required control and operations. Provision with Bicep/Terraform, review changes, and deploy immutable artifacts through protected environments. Azure Monitor metrics, Log Analytics, Activity Logs, and resource diagnostic logs serve different troubleshooting needs.
+
+### Troubleshooting example
+
+**Symptom:** workload cannot reach a storage account through a private endpoint. Check name resolution from the workload (private DNS zone/link), endpoint connection approval/state, route/NSG rules, storage firewall, and workload identity/role scope. Network reachability and authorization are separate checks.
+
+### Revision
+
+Management groups organize policy/permissions; resource groups organize lifecycles; RBAC grants access; Policy constrains configuration; managed identity supplies workload identity; private endpoint is not equivalent to a public endpoint with an allowlist.

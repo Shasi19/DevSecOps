@@ -26,3 +26,36 @@ Deploy a containerized service to Cloud Run or GKE, give it a dedicated runtime 
 ## Further reading
 
 [Google Cloud Architecture Framework](https://cloud.google.com/architecture/framework) · [IAM overview](https://cloud.google.com/iam/docs/overview)
+
+## Topic roadmap and examples
+
+### Organization, projects, and identity
+
+Organization/folders/projects form the resource hierarchy. IAM policies inherit through it; bindings associate principals with roles. A service account represents a workload, while Workload Identity Federation lets an external identity exchange proof for short-lived credentials. Avoid downloadable service-account keys unless there is a documented exception and lifecycle control.
+
+### Network and service path
+
+```mermaid
+flowchart LR
+  U[Users] --> LB[Global load balancer]
+  LB --> RUN[Cloud Run / GKE]
+  RUN --> VPC[VPC connector / VPC]
+  VPC --> SQL[(Private Cloud SQL)]
+  RUN --> LOG[Cloud Logging + Monitoring]
+  CI[CI workload identity] --> DEPLOY[Deploy API]
+  DEPLOY --> RUN
+```
+
+VPC networks are global while subnetworks are regional. Firewall rules and routes, Cloud NAT, DNS, and service controls each address different parts of connectivity and boundary design.
+
+### Compute, data, delivery
+
+Choose Compute Engine, GKE, Cloud Run, or Functions based on runtime/control needs. Choose Cloud Storage, Cloud SQL, BigQuery, or other data services based on access and consistency patterns. Provision through reviewed IaC; use Artifact Registry and immutable versions; observe with Cloud Monitoring, Logging, Trace, and audit logs.
+
+### Troubleshooting example
+
+**Symptom:** CI can build but cannot deploy. Verify federation provider/audience and subject conditions, service-account impersonation permission, deployment role scope, enabled API, and target project. Then inspect deployment logs. Do not solve it by granting project-wide Owner.
+
+### Revision
+
+Project is a common policy, quota, and billing unit; IAM bindings grant; organization policy constrains; a service account is an identity, not a key; global VPC does not make every subnet global; audit logs track administrative/data access events according to configuration.

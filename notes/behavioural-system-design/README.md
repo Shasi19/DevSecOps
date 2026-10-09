@@ -23,3 +23,26 @@ Design a webhook delivery service. Discuss signature verification, durable queue
 ## Interview checklist
 
 Keep answers structured, state assumptions, invite correction, and leave time for trade-offs and follow-up questions. Do not claim ownership of work you did not perform.
+
+## Topic roadmap, worked design, and revision
+
+**Behavioural topics:** ownership, collaboration, disagreement, ambiguity, prioritization, failure, customer focus, influence without authority, learning, and mentoring. Prepare several truthful examples and adapt each to the question. Quantify impact only when you can substantiate it.
+
+**System-design topics:** requirements and constraints; capacity estimates; API/data model; component boundaries; synchronous vs asynchronous work; consistency; cache/queue/database choices; scaling; security; observability; deployment; failure recovery; and cost/trade-offs.
+
+```mermaid
+flowchart LR
+  Client --> API[Gateway + auth]
+  API --> Queue[Durable queue]
+  Queue --> Worker[Delivery workers]
+  Worker --> Target[Customer webhook]
+  Worker --> Store[(Attempts + idempotency)]
+  Store --> DLQ[Dead-letter / replay]
+  API --> Rate[Per-tenant rate limits]
+```
+
+**Worked scenario—webhook service:** authenticate registration; sign each payload; persist delivery before acknowledging; process asynchronously; retry transient failures with capped backoff/jitter; make delivery IDs idempotent; cap retries; expose replay with authorization/audit; isolate tenant quotas; and alert on queue age/error ratio. Discuss at-least-once semantics rather than promising exactly once over unreliable networks.
+
+**Troubleshooting an interview answer:** if the design sprawls, return to requirements and draw one request path; if capacity estimates are questioned, show assumptions and arithmetic; if a proposed component adds complexity, compare it with the simplest baseline; if a behavioural story lacks impact, clarify your role and the verifiable result without inventing metrics.
+
+**Revision framework:** clarify → estimate → draw baseline → walk one request/write path → identify bottleneck/failure → secure it → add observability/recovery → state trade-offs. For STAR, keep Situation/Task brief; focus on your Actions and verifiable Result; close with learning.

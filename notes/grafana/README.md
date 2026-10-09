@@ -21,3 +21,23 @@ Create an SLO dashboard with request rate, error ratio, and latency, then add a 
 ## Further reading
 
 [Grafana documentation](https://grafana.com/docs/grafana/latest/)
+
+## Topic roadmap and dashboard example
+
+**Data path:** a data source plugin queries a backend; dashboard variables parameterize queries; panels visualize results; transformations reshape returned data; alert rules evaluate conditions; contact points/routes deliver notifications. Provision data sources/folders/dashboards and alert rules as code to keep environments consistent.
+
+**Example dashboard layout:** top row for SLO/error budget and active alerts; next row request rate, error ratio, latency percentiles; lower rows by dependency/region/version. Link panels to useful drill-downs, deployment annotations, and runbooks. Use dashboard variables with safe defaults, clear units, and meaningful time windows.
+
+```mermaid
+flowchart LR
+  PROM[Prometheus] --> DS[Grafana data source]
+  LOGS[Log backend] --> DS
+  DS --> DASH[Dashboard panels]
+  DS --> ALERT[Alert evaluation]
+  ALERT --> ROUTE[Notification policy]
+  ROUTE --> TEAM[Owning team]
+```
+
+**Troubleshooting:** no data—verify time range, datasource permissions, query and labels; slow dashboard—inspect query cost, refresh frequency, cardinality and backend; alert differs from panel—compare rule evaluation interval, reducer, pending period, no-data/error handling; duplicate pages—review grouping, labels, routes, and inhibition.
+
+**Revision:** dashboard informs; alert pages; datasource query semantics matter; provisioned config is reviewable; alert no-data behavior must be deliberate; dashboards should answer operational questions and link to action.

@@ -21,3 +21,25 @@ Respond to a regional dependency outage during a release. Explain whether to hal
 ## Further reading
 
 [Google SRE books](https://sre.google/books/) · [Incident management guide](https://sre.google/workbook/incident-response/)
+
+## Topic roadmap and scenario diagram
+
+**Reliability topics:** SLIs/SLOs/error budgets, availability math, latency percentiles, capacity and load shedding, toil, on-call, incident command, postmortems, change risk, dependency failure, backup/restore, and disaster recovery. State measurement windows and user impact; averages can hide tail latency.
+
+```mermaid
+flowchart LR
+  DETECT[Alert / user report] --> IC[Incident commander]
+  IC --> MIT[Contain + mitigate]
+  IC --> COMMS[Stakeholder updates]
+  MIT --> VERIFY[Verify user SLI recovery]
+  VERIFY --> REVIEW[Blameless review]
+  REVIEW --> ACTION[Owned corrective actions]
+```
+
+**Managerial topics:** prioritization under constraints, team health, feedback, conflict, delegation, hiring/onboarding, career growth, cross-team influence, delivery forecasting, and balancing reliability/security with feature work. Explain decision criteria, communication, trade-offs, and follow-up—not just the outcome.
+
+**Scenario—rising error rate during release:** declare scope and severity; appoint incident roles; pause/roll back if change correlation and risk justify it; protect data and preserve evidence; communicate cadence; verify recovery using the user-facing SLI; then conduct a blameless contributing-factor review with tracked actions.
+
+**Troubleshooting an interview answer:** if the prompt is underspecified, ask about user impact and constraints; if many actions compete, state severity and risk criteria; if recovery is uncertain, prefer reversible containment and define a verification signal; if an SLO is proposed without measurement, identify the SLI and window first.
+
+**Revision:** SLI measures; SLO target; SLA commitment; error budget informs risk; alert on actionable symptoms; postmortem blameless does not mean no accountability; every action has an owner, due date, and measurable verification.

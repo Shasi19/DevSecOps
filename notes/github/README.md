@@ -23,3 +23,25 @@ Configure a protected default branch with required tests and review, add CODEOWN
 ## Further reading
 
 [GitHub Docs](https://docs.github.com/) · [Repository rulesets](https://docs.github.com/repositories/configuring-branches-and-merges-in-your-repository)
+
+## Topic roadmap and operating examples
+
+**Collaboration:** issue → branch → pull request → required review/checks → merge → release. Use templates and labels to capture context, not as a replacement for clear ownership. CODEOWNERS requests expertise; branch rules/rulesets enforce merge conditions.
+
+```mermaid
+flowchart LR
+  DEV[Developer branch] --> PR[Pull request]
+  PR --> CI[Required checks]
+  PR --> REVIEW[Code-owner review]
+  CI --> MERGE[Protected merge]
+  REVIEW --> MERGE
+  MERGE --> REL[Tagged release]
+```
+
+**Repository administration:** use teams and least-privilege roles, audit outside collaborators and app installations, and separate private deployment environments. Releases should point to a reviewed commit and identify artifact digests. Packages have independent access/retention considerations.
+
+**Example:** a pull request modifies a workflow. Review its `permissions`, action references, event triggers, and whether untrusted code can access secrets—not only application source changes. A read-only `pull_request` workflow is safer than granting write tokens to arbitrary PR code.
+
+**Troubleshooting:** required check missing—verify exact check name, event execution, and whether the commit is current. A workflow did not run—inspect branch/path filters and fork restrictions. A collaborator cannot clone—check org SSO authorization, team/repo permission, and identity state; do not issue an oversized token as a workaround.
+
+**Revision:** authentication answers who; authorization answers what; branch protection/rulesets gate changes; Actions secrets are not safe from code that is allowed to read them; a release tag is useful only if tied to a verified source and artifact.

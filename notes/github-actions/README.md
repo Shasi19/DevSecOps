@@ -34,3 +34,25 @@ Build a test-and-release pipeline with least-privilege permissions, dependency c
 ## Further reading
 
 [GitHub Actions documentation](https://docs.github.com/actions) · [Security hardening](https://docs.github.com/actions/security-guides/security-hardening-for-github-actions)
+
+## Topic roadmap and secure pipeline example
+
+**Events and execution:** `on` selects triggers; filters and `if` conditions control scope; `needs` forms a job DAG; runners execute steps; artifacts carry outputs across jobs. Pin action versions, set `timeout-minutes`, and use `concurrency` to prevent overlapping deployments.
+
+**Webhooks:** GitHub sends event payloads to configured endpoints. Verify the signature over the exact raw request body using a protected secret, reject invalid signatures, and respond promptly before processing asynchronously. Deduplicate deliveries by delivery ID, tolerate retries, and return success only after durable acceptance. Do not trust event payloads as authorization; fetch current resource state through a scoped API identity when needed. Protect webhook secrets and avoid logging full payloads.
+
+```mermaid
+flowchart LR
+  PR[Pull request] --> TEST[Tests + lint]
+  TEST --> ART[Build immutable artifact]
+  ART --> SCAN[Scan / attest]
+  SCAN --> STAGE[Deploy staging]
+  STAGE --> APPROVE[Environment approval]
+  APPROVE --> PROD[Deploy same artifact]
+```
+
+Use `GITHUB_TOKEN` permissions minimally. OIDC tokens can exchange workflow identity for short-lived cloud credentials; trust policies should constrain repository, branch/environment, and audience. Treat cache/artifact contents from untrusted PRs as untrusted. Avoid constructing shell code from `${{ }}` expressions; pass untrusted values via environment and validate/quote them. Composite actions and reusable workflows need version and permission review too.
+
+**Troubleshooting:** job stuck—check runner labels/capacity and concurrency; auth denied—inspect token scope, event type (forks), OIDC subject/audience, and environment protection; artifact not found—check job dependency, artifact name/retention, and run ID; intermittent test—separate product/test/runner causes before adding retries.
+
+**Revision:** workflow YAML is executable policy; `needs` controls dependency order; environment approval protects deployment, not build; secrets masking does not prevent exfiltration; pinning protects against mutable action tags.

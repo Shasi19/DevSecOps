@@ -23,3 +23,22 @@ Ingest JSON service logs, define a stable mapping, create a lifecycle policy, an
 ## Further reading
 
 [Elastic documentation](https://www.elastic.co/guide/index.html)
+
+## Topic roadmap and data-flow diagram
+
+**Ingest and query:** Elastic Agent/Beats or Logstash collect events; ingest pipelines parse/enrich; mappings define field types; indices/data streams organize data; shards distribute work; Kibana explores and visualizes. Use ECS-compatible fields when practical. Prefer data streams/lifecycle policies for time-series logs.
+
+```mermaid
+flowchart LR
+  APP[Apps / hosts] --> AGENT[Agent or Beats]
+  AGENT --> PIPE[Logstash / ingest pipeline]
+  PIPE --> ES[Elasticsearch data stream]
+  ES --> KIB[Kibana search + dashboards]
+  ES --> SNAP[Protected snapshots]
+```
+
+**Example:** parse JSON at ingestion, map `@timestamp` as date and status as numeric/keyword as appropriate, redact secrets, and configure rollover/retention before high-volume onboarding. Aggregations should filter time and fields first.
+
+**Troubleshooting:** cluster yellow—unassigned replicas, capacity and allocation; red—unassigned primary and data risk; indexing rejected—resource pressure, bulk sizing, mappings; query slow—shard count, expensive wildcard/aggregation, time range; disk watermark—retention, snapshots, tiering and expansion. Restore a snapshot into an isolated test cluster.
+
+**Revision:** primary shard stores a partition; replica supports resilience/read capacity; replica is not backup; mapping controls query semantics; lifecycle manages data; snapshot repository must be protected and restore-tested; Kibana is not a substitute for access controls.
