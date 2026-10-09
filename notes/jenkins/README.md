@@ -49,3 +49,7 @@ See [`examples/Jenkinsfile`](examples/Jenkinsfile). It validates the notes repos
 ## End-to-end Jenkins process
 
 See [`process.md`](process.md) for controller/agent setup, credential separation, pipeline creation, artifact promotion, production approval, recovery, and controller backup/upgrade operations.
+
+## Visual study cards
+
+Browse the [10 original visual study cards](visuals/README.md) as SVG or PNG, covering architecture, workflow, security, delivery, observability, troubleshooting, recovery, resilience, scenarios, and revision.

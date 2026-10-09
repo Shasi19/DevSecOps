@@ -66,3 +66,7 @@ The diagram is a reference pattern, not a universal topology. Cloud Run, GKE, an
 ## Create and operate a VM
 
 For the Compute Engine use case decision, sandbox setup, private `gcloud` creation, IAP/OS Login connection, verification, troubleshooting, and cleanup, follow [`vm-instance.md`](vm-instance.md).
+
+## Visual study cards
+
+Browse the [10 original visual study cards](visuals/README.md) as SVG or PNG, covering architecture, workflow, security, delivery, observability, troubleshooting, recovery, resilience, scenarios, and revision.

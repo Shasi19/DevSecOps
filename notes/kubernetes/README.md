@@ -51,3 +51,7 @@ See [`examples/secure-web/`](examples/secure-web/) for a Deployment, internal Se
 ## End-to-end workload process
 
 See [`process.md`](process.md) for cluster prerequisites, namespace/security setup, Deployment/Service creation, rollout verification, incident rollback, and safe resource cleanup.
+
+## Visual study cards
+
+Browse the [10 original visual study cards](visuals/README.md) as SVG or PNG, covering architecture, workflow, security, delivery, observability, troubleshooting, recovery, resilience, scenarios, and revision.

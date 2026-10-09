@@ -53,3 +53,7 @@ flowchart LR
 ## End-to-end host administration process
 
 Follow [`process.md`](process.md) for a repeatable host onboarding, service deployment, health verification, incident diagnosis, and decommission procedure.
+
+## Visual study cards
+
+Browse the [10 original visual study cards](visuals/README.md) as SVG or PNG, covering architecture, workflow, security, delivery, observability, troubleshooting, recovery, resilience, scenarios, and revision.

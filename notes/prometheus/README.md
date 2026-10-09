@@ -50,3 +50,7 @@ See [`examples/`](examples/) for a minimal scrape config and alert rules. Replac
 ## End-to-end monitoring process
 
 See [`process.md`](process.md) for instrumenting a service, configuring discovery/scrapes, writing and testing PromQL rules, routing alerts, operating storage, and diagnosing missing/high-cardinality data.
+
+## Visual study cards
+
+Browse the [10 original visual study cards](visuals/README.md) as SVG or PNG, covering architecture, workflow, security, delivery, observability, troubleshooting, recovery, resilience, scenarios, and revision.

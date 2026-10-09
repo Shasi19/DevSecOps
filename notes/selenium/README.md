@@ -50,3 +50,7 @@ See [`examples/java-testng/`](examples/java-testng/) for a Maven test with expli
 ## End-to-end browser-test process
 
 See [`process.md`](process.md) for environment/test-data preparation, browser/Grid startup, deterministic test execution, failure artifacts, CI triage, flake reduction, and cleanup.
+
+## Visual study cards
+
+Browse the [10 original visual study cards](visuals/README.md) as SVG or PNG, covering architecture, workflow, security, delivery, observability, troubleshooting, recovery, resilience, scenarios, and revision.

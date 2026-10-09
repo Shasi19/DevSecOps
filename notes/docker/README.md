@@ -58,3 +58,7 @@ See [`examples/`](examples/) for a runnable minimal HTTP image, `.dockerignore`,
 ## End-to-end container lifecycle
 
 See [`process.md`](process.md) for application analysis, Dockerfile design, local build/run, image scanning/publishing, deployment handoff, runtime checks, and cleanup.
+
+## Visual study cards
+
+Browse the [10 original visual study cards](visuals/README.md) as SVG or PNG, covering architecture, workflow, security, delivery, observability, troubleshooting, recovery, resilience, scenarios, and revision.

@@ -52,3 +52,7 @@ See [`process.md`](process.md) for repository setup, protected branches, merge-r
 ## Copyable CI skeleton
 
 See [`examples/.gitlab-ci.yml`](examples/.gitlab-ci.yml) for validation of this notes repository. It intentionally has no generic build or deployment: packaging all repository files can accidentally publish tracked credentials, and application builds are language-specific. Add an artifact stage only after defining an explicit allowlist, secret scan, provenance, and immutable registry; configure production deployment separately behind protected environments and a short-lived identity. Pin the CI image by approved digest in production.
+
+## Visual study cards
+
+Browse the [10 original visual study cards](visuals/README.md) as SVG or PNG, covering architecture, workflow, security, delivery, observability, troubleshooting, recovery, resilience, scenarios, and revision.

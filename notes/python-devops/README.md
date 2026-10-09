@@ -70,3 +70,7 @@ Do not use this as a full production SLI probe without reviewing TLS verificatio
 ## End-to-end Python automation process
 
 See [`process.md`](process.md) for project/virtualenv setup, CLI/API design, exception and retry policy, tests, packaging, deployment, and secret-safe operations.
+
+## Visual study cards
+
+Browse the [10 original visual study cards](visuals/README.md) as SVG or PNG, covering architecture, workflow, security, delivery, observability, troubleshooting, recovery, resilience, scenarios, and revision.

@@ -56,3 +56,7 @@ Stop uncontrolled ingest growth first. Inspect node disk, shard allocation, inde
 ## End-to-end log pipeline process
 
 See [`process.md`](process.md) for source onboarding, parsing/mapping, lifecycle setup, Kibana dashboards/alerts, snapshots, troubleshooting, and source offboarding.
+
+## Visual study cards
+
+Browse the [10 original visual study cards](visuals/README.md) as SVG or PNG, covering architecture, workflow, security, delivery, observability, troubleshooting, recovery, resilience, scenarios, and revision.

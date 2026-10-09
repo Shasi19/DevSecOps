@@ -73,3 +73,7 @@ See [`examples/`](examples/) for an inventory-free playbook and template. The ex
 ## End-to-end configuration rollout
 
 See [`process.md`](process.md) for inventory/credential setup, idempotent role development, staged rollout, drift verification, rollback, and secret-safe operation.
+
+## Visual study cards
+
+Browse the [10 original visual study cards](visuals/README.md) as SVG or PNG, covering architecture, workflow, security, delivery, observability, troubleshooting, recovery, resilience, scenarios, and revision.

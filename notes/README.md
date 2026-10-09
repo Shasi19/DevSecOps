@@ -45,3 +45,7 @@ Each process guide walks through choosing a use case, prerequisites, creating/co
 | [Selenium](selenium/) | [Browser test lifecycle](selenium/process.md) |
 | [Behavioural/system design](behavioural-system-design/) | [Interview preparation process](behavioural-system-design/process.md) |
 | [Managerial/SRE interviews](managerial-sre-interviews/) | [SRE scenario process](managerial-sre-interviews/process.md) |
+
+## Visual guide library
+
+Explore [10 original SVG/PNG study cards for each of the 28 guides](visuals/README.md).

@@ -50,3 +50,7 @@ flowchart LR
 ## Repeatable interview preparation process
 
 See [`process.md`](process.md) for competency inventory, STAR story development, timed system-design practice, feedback, and ethical follow-up preparation.
+
+## Visual study cards
+
+Browse the [10 original visual study cards](visuals/README.md) as SVG or PNG, covering architecture, workflow, security, delivery, observability, troubleshooting, recovery, resilience, scenarios, and revision.

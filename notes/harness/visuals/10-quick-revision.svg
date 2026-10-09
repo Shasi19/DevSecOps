@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900">
+<defs><linearGradient id="wash" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e8ad50" stop-opacity=".17"/><stop offset="1" stop-color="#e8ad50" stop-opacity="0"/></linearGradient><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#e8ad50"/></marker></defs>
+<rect x="0" y="0" width="1440" height="900" rx="0" fill="#0a1020" stroke="none"/>
+<circle cx="1340" cy="95" r="220" fill="url(#wash)"/>
+<path d="M64 146H1376" stroke="#293955" stroke-width="2"/>
+<rect x="64" y="48" width="52" height="52" rx="15" fill="#e8ad50" stroke="none"/>
+<text x="76" y="82" fill="#0a1020" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="800">HAR</text>
+<text x="132" y="70" fill="#e8ad50" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="750">HARNESS</text>
+<text x="132" y="99" fill="#aab8d0" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600">FIELD GUIDE  /  VISUAL SERIES</text>
+<rect x="1196" y="51" width="180" height="42" rx="20" fill="#111b30" stroke="#293955"/>
+<text x="1220" y="78" fill="#f3f6ff" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700">10  /  10</text>
+<text x="68" y="205" fill="#e8ad50" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="750">REVISION</text>
+<text x="68" y="250" fill="#f3f6ff" font-family="Arial,Helvetica,sans-serif" font-size="38" font-weight="750">Quick revision</text>
+<text x="68" y="298" fill="#aab8d0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="500">Remember the control, its evidence, and the failure it prevents.</text>
+<rect x="210" y="350" width="480" height="126" rx="18" fill="#111b30" stroke="#293955"/><circle cx="245" cy="385" r="16" fill="#e8ad50" fill-opacity=".2"/><text x="240" y="391" fill="#e8ad50" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700">1</text><text x="278" y="386" fill="#f3f6ff" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="650">Pipeline orchestrates</text><rect x="750" y="350" width="480" height="126" rx="18" fill="#111b30" stroke="#293955"/><circle cx="785" cy="385" r="16" fill="#e8ad50" fill-opacity=".2"/><text x="780" y="391" fill="#e8ad50" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700">2</text><text x="818" y="386" fill="#f3f6ff" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="650">delegate executes</text><rect x="210" y="510" width="480" height="126" rx="18" fill="#111b30" stroke="#293955"/><circle cx="245" cy="545" r="16" fill="#e8ad50" fill-opacity=".2"/><text x="240" y="551" fill="#e8ad50" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700">3</text><text x="278" y="546" fill="#f3f6ff" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="650">artifact is promoted</text><rect x="750" y="510" width="480" height="126" rx="18" fill="#111b30" stroke="#293955"/><circle cx="785" cy="545" r="16" fill="#e8ad50" fill-opacity=".2"/><text x="780" y="551" fill="#e8ad50" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700">4</text><text x="818" y="546" fill="#f3f6ff" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="650">Verify outcome</text>
+<rect x="64" y="730" width="1312" height="106" rx="20" fill="#111b30" stroke="#293955"/>
+<rect x="86" y="754" width="7" height="56" rx="4" fill="#e8ad50" stroke="none"/>
+<text x="116" y="773" fill="#e8ad50" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="750">PRODUCTION CHECK</text>
+<text x="116" y="805" fill="#f3f6ff" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="550">Keep approval, policy, and production credentials independently governed.</text>
+<text x="68" y="872" fill="#aab8d0" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600">DEVSECOPS STUDY NOTES   •   ORIGINAL LEARNING GRAPHIC</text>
+<text x="1160" y="872" fill="#aab8d0" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600">Harness</text>
+</svg>

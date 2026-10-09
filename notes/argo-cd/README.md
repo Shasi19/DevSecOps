@@ -49,3 +49,7 @@ See [`examples/application.yaml`](examples/application.yaml). It is a template w
 ## End-to-end GitOps application process
 
 See [`process.md`](process.md) for repository bootstrap, AppProject boundaries, application registration, sync/health gates, drift response, rollback, and deletion safeguards.
+
+## Visual study cards
+
+Browse the [10 original visual study cards](visuals/README.md) as SVG or PNG, covering architecture, workflow, security, delivery, observability, troubleshooting, recovery, resilience, scenarios, and revision.

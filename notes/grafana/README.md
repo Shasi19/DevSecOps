@@ -55,3 +55,7 @@ When an alert fires, dashboard should show SLI trend, affected service/region/re
 ## End-to-end dashboard process
 
 See [`process.md`](process.md) for datasource onboarding, dashboard provisioning, alert configuration, access control, testing, incident use, and dashboard lifecycle.
+
+## Visual study cards
+
+Browse the [10 original visual study cards](visuals/README.md) as SVG or PNG, covering architecture, workflow, security, delivery, observability, troubleshooting, recovery, resilience, scenarios, and revision.
