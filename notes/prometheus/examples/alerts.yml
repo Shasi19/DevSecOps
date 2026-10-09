@@ -1,0 +1,35 @@
+groups:
+  - name: service-availability
+    rules:
+      - alert: ApplicationTargetDown
+        expr: up{job="app"} == 0
+        for: 5m
+        labels:
+          severity: page
+        annotations:
+          summary: "Application scrape target is unavailable"
+          runbook_url: "https://runbooks.example.invalid/application-target-down"
+
+      - alert: ApplicationTargetMissing
+        expr: absent(up{job="app"})
+        for: 5m
+        labels:
+          severity: ticket
+        annotations:
+          summary: "Application target is missing from service discovery"
+          runbook_url: "https://runbooks.example.invalid/application-target-missing"
+
+  - name: service-symptoms
+    rules:
+      - alert: HighApplicationErrorRatio
+        expr: |
+          sum by (service) (rate(http_requests_total{job="app",status=~"5.."}[5m]))
+          /
+          clamp_min(sum by (service) (rate(http_requests_total{job="app"}[5m])), 1e-9)
+          > 0.05
+        for: 10m
+        labels:
+          severity: page
+        annotations:
+          summary: "5xx ratio is above 5% for {{ $labels.service }}"
+          runbook_url: "https://runbooks.example.invalid/high-error-ratio"

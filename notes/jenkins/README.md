@@ -41,3 +41,7 @@ flowchart LR
 **Troubleshooting:** build queued—agent labels, executors, node offline state, and cloud capacity; checkout fails—credential scope, branch/ref, network and host keys; credential unavailable—folder/job scope and binding; controller unstable—disk, heap, plugin compatibility, queue, and thread/agent load.
 
 **Revision:** controller orchestrates; agent executes; credential masking is not isolation; a trusted PR build differs from a fork; plugin count increases attack/upgrade surface; immutable artifacts make promotion and rollback auditable.
+
+## Jenkinsfile example
+
+See [`examples/Jenkinsfile`](examples/Jenkinsfile). It validates the notes repository with explicit timeouts and workspace cleanup; it does not pretend to build or deploy an application. Configure the controller to use isolated ephemeral agents. Add app-specific build, artifact allowlisting/scanning, and a separate protected deployment stage only after short-lived identity and environment approval are configured. The agent label must match your managed environment.

@@ -61,3 +61,7 @@ fi
 **Troubleshooting:** script appears to skip failures—inspect conditionals, command substitutions, pipelines, and `pipefail`; wrong arguments—check word splitting and quote expansion; temp files remain—check signal/exit traps and variable scope; hangs—identify child process and use bounded timeout.
 
 **Revision:** single quotes prevent expansion; double quotes preserve a single argument while allowing selected expansions; arrays preserve argument boundaries; `set -e` is not exception handling; `pipefail` exposes pipeline errors; never `eval` untrusted text; stdout is output, stderr is diagnostics.
+
+## Health-check script lab
+
+See [`examples/check-health.sh`](examples/check-health.sh). It validates an HTTPS URL and bounds curl runtime. It deliberately has no retry loop: add retries only for classified transient failures and ensure the caller's deadline remains bounded. Run with `bash examples/check-health.sh https://service.example/healthz`; test a failure against a controlled endpoint.

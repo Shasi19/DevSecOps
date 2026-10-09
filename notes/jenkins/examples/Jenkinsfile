@@ -1,0 +1,26 @@
+pipeline {
+    agent { label 'ephemeral-linux' }
+
+    options {
+        timestamps()
+        timeout(time: 20, unit: 'MINUTES')
+        disableConcurrentBuilds()
+        buildDiscarder(logRotator(numToKeepStr: '30'))
+    }
+
+    stages {
+        stage('Validate') {
+            steps {
+                sh 'python3 -m compileall -q .'
+                sh 'git diff --check'
+            }
+        }
+
+    }
+
+    post {
+        always {
+            deleteDir()
+        }
+    }
+}

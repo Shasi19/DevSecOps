@@ -41,3 +41,13 @@ flowchart LR
 **Troubleshooting:** no data—verify time range, datasource permissions, query and labels; slow dashboard—inspect query cost, refresh frequency, cardinality and backend; alert differs from panel—compare rule evaluation interval, reducer, pending period, no-data/error handling; duplicate pages—review grouping, labels, routes, and inhibition.
 
 **Revision:** dashboard informs; alert pages; datasource query semantics matter; provisioned config is reviewable; alert no-data behavior must be deliberate; dashboards should answer operational questions and link to action.
+
+## Panel query cookbook
+
+For a request-rate panel, query a counter with `sum by (service)(rate(http_requests_total[5m]))`. For error ratio, divide the filtered error rate by the total request rate, guarding low/no traffic and ensuring matching labels. For latency, use histogram buckets with `histogram_quantile(0.95, sum by (le, service)(rate(http_request_duration_seconds_bucket[5m])))`; confirm the application exports a Prometheus histogram. Label units explicitly and do not average quantiles from separate instances.
+
+Provision folders, datasources, dashboards, and alert rules from version control. Validate dashboard JSON in CI and deploy to a test Grafana before production. Avoid committing data-source passwords; use environment/secret-provider integration. Set dashboard permissions and folder ownership deliberately.
+
+## Incident workflow example
+
+When an alert fires, dashboard should show SLI trend, affected service/region/revision, and deployment annotations. Link to the alert rule and runbook. During an incident, narrow dashboard variables and time range, compare healthy vs failing slices, and use trace/log links for drill-down. An empty panel may indicate no traffic, missing series, query error, or backend delay—not necessarily zero errors.

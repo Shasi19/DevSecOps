@@ -50,3 +50,7 @@ flowchart LR
 **Troubleshooting:** container exits—inspect exit code, logs, entrypoint, and signal handling; cannot bind port—check app bind address (often `0.0.0.0` inside container), published port, and host conflict; image unexpectedly large—inspect layers, build context, and multi-stage separation; permission denied—check UID/GID and mounted-volume ownership.
 
 **Revision:** image is a template, container is a process; `EXPOSE` documents but does not publish; a tag is mutable; secrets in build args/layers persist; volume data and image lifecycle differ; container isolation shares the host kernel.
+
+## Build lab
+
+See [`examples/`](examples/) for a runnable minimal HTTP image, `.dockerignore`, and hardened local run commands. The example uses a readable base tag for buildability; pin an approved immutable digest in production and keep updating it through a patch process.

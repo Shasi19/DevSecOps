@@ -42,3 +42,7 @@ flowchart LR
 **Troubleshooting:** target down—DNS, route, TLS/auth, endpoint path and timeout; missing series—scrape labels, metric name, exporter and time range; alert not firing—rule evaluation, labels, pending duration, absent data; disk growth—cardinality, retention, WAL and block size.
 
 **Revision:** metric type informs query; labels define series identity; `rate` handles resets per series; alert on symptoms with a runbook; scrape success is not service health; monitor Prometheus itself and plan retention/backup.
+
+## Runnable configuration lab
+
+See [`examples/`](examples/) for a minimal scrape config and alert rules. Replace the example app endpoint and metric names with instrumentation that actually exists. Check syntax with `promtool check config` and `promtool check rules`; use `promtool test rules` with test fixtures before production. The rules are examples, not an SLO policy.

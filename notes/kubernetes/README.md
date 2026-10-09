@@ -43,3 +43,7 @@ flowchart LR
 **Troubleshooting:** `Pending`—events, requests/quota, node selectors/taints and PVC; `CrashLoopBackOff`—previous logs, command/config/probe failures; Service has no endpoints—selector, Pod labels, readiness; `ImagePullBackOff`—image reference, registry auth, network; rollout stalls—events, readiness, capacity, and `kubectl rollout status/history`.
 
 **Revision:** request schedules; limit caps; readiness gates traffic; liveness restarts; startup delays other probes; Service is stable discovery, not a process; namespace is organization, not sufficient isolation; reconcile manifests and avoid unmanaged production edits.
+
+## Production manifest lab
+
+See [`examples/secure-web/`](examples/secure-web/) for a Deployment, internal Service, PodDisruptionBudget, and default-deny NetworkPolicy, with run instructions and failure exercises. The sample assumes a specific port and health endpoint; adapt these to the application. NetworkPolicy enforcement depends on the cluster CNI, and a deny-all policy can break DNS/dependencies unless explicit rules are added.

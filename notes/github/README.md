@@ -45,3 +45,21 @@ flowchart LR
 **Troubleshooting:** required check missing—verify exact check name, event execution, and whether the commit is current. A workflow did not run—inspect branch/path filters and fork restrictions. A collaborator cannot clone—check org SSO authorization, team/repo permission, and identity state; do not issue an oversized token as a workaround.
 
 **Revision:** authentication answers who; authorization answers what; branch protection/rulesets gate changes; Actions secrets are not safe from code that is allowed to read them; a release tag is useful only if tied to a verified source and artifact.
+
+## Repository baseline checklist
+
+1. Protect default/release branches: require pull requests, current required checks, and appropriate reviews; block force-push/deletion unless a documented exception exists.
+2. Use CODEOWNERS for sensitive paths such as `.github/workflows/`, deployment manifests, and Terraform.
+3. Limit default `GITHUB_TOKEN` permissions and grant job-specific write permissions only where needed.
+4. Protect production environments with reviewer rules and branch/tag restrictions; store scoped secrets there, not at broad organization level by default.
+5. Review installed GitHub Apps, webhooks, deploy keys, outside collaborators, and classic/fine-grained tokens on a schedule.
+6. Enable dependency and secret scanning appropriate to repo visibility/policy; triage findings with owners and SLAs.
+7. Tie releases to signed/verified source commits and immutable artifact digests; retain build provenance and rollback instructions.
+
+## Pull-request incident scenario
+
+A PR changes deployment YAML and CI permissions. Review the proposed cloud resources, destructive updates, workflow events, token permissions, third-party actions, secret exposure, artifact source, and production path. Require a plan/status check generated from the exact PR revision. If an untrusted fork can modify a workflow that receives secrets or write tokens, halt the release path and remove that privilege before merging.
+
+## Revision
+
+Branch rules govern merges, not runtime cloud access; CODEOWNERS routes review but does not enforce least privilege; environment approval does not make a malicious workflow safe; token permission should be explicit; releases need artifact-to-commit provenance.

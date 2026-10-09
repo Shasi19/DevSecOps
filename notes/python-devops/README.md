@@ -55,3 +55,14 @@ Validate external data at boundaries. Distinguish network timeout, HTTP error, m
 **Troubleshooting:** `ModuleNotFoundError`—confirm interpreter/venv and installed project; subprocess hangs—timeout and capture output carefully; Unicode error—inspect encoding boundary; API 403—identity/scope differs from network failure; duplicate changes—operation lacks idempotency key/state check.
 
 **Revision:** exceptions are control flow only when handled specifically; subprocess argument list avoids shell parsing; timeouts bound work; logs need redaction; a retry policy needs limits and idempotency; unit tests mock boundaries, integration tests verify real contracts.
+
+## Runnable health-check CLI
+
+See [`examples/check_endpoint.py`](examples/check_endpoint.py). It uses only the Python standard library, validates input, bounds request time, distinguishes HTTP/network failures, and returns a nonzero status on failure.
+
+```bash
+python3 examples/check_endpoint.py https://example.com/healthz --timeout 3
+echo $?
+```
+
+Do not use this as a full production SLI probe without reviewing TLS verification, proxy behavior, expected status/body, retry policy, and secret redaction. A single successful request is not a complete availability measurement.
