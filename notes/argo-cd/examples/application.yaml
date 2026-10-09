@@ -1,0 +1,41 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: web-staging
+  namespace: argocd
+spec:
+  description: Staging web workload with constrained source and destination.
+  sourceRepos:
+    - https://github.com/EXAMPLE_ORG/EXAMPLE_REPO.git
+  destinations:
+    - namespace: web-staging
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist: []
+  namespaceResourceWhitelist:
+    - group: ""
+      kind: ConfigMap
+    - group: ""
+      kind: Service
+    - group: apps
+      kind: Deployment
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: web-staging
+  namespace: argocd
+spec:
+  project: web-staging
+  source:
+    repoURL: https://github.com/EXAMPLE_ORG/EXAMPLE_REPO.git
+    targetRevision: main
+    path: deploy/overlays/staging
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: web-staging
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: false
+    syncOptions:
+      - CreateNamespace=false

@@ -1,0 +1,44 @@
+---
+- name: Configure web nodes
+  hosts: web
+  become: true
+  serial: 1
+  vars:
+    listen_port: 8080
+  tasks:
+    - name: Install nginx
+      ansible.builtin.apt:
+        name: nginx
+        state: present
+        update_cache: true
+        cache_valid_time: 3600
+
+    - name: Install validated nginx configuration
+      ansible.builtin.template:
+        src: nginx.conf.j2
+        dest: /etc/nginx/nginx.conf
+        owner: root
+        group: root
+        mode: "0644"
+        validate: "nginx -t -c %s"
+      notify: Reload nginx
+
+    - name: Ensure nginx is enabled and running
+      ansible.builtin.service:
+        name: nginx
+        enabled: true
+        state: started
+
+    - name: Apply notified configuration before health check
+      ansible.builtin.meta: flush_handlers
+
+    - name: Verify local health endpoint
+      ansible.builtin.uri:
+        url: "http://127.0.0.1:{{ listen_port }}/healthz"
+        status_code: 200
+
+  handlers:
+    - name: Reload nginx
+      ansible.builtin.service:
+        name: nginx
+        state: reloaded

@@ -44,3 +44,13 @@ flowchart LR
 **Troubleshooting:** step cannot reach target—delegate network/DNS/firewall and target endpoint; connector denied—identity, scope, token expiry, and target policy; pipeline hangs—timeouts, delegate capacity, and queue; deploy succeeds but app unhealthy—verify probe semantics and service-specific health, then use the rollback path.
 
 **Revision:** delegate is privileged execution infrastructure; connector grants access; approval does not replace technical verification; retries can duplicate side effects; artifact promotion should preserve immutable identity; template changes can impact many pipelines.
+
+## Production pipeline review checklist
+
+Before enabling a pipeline, document the source branch/event trust level, build identity, artifact repository/digest, delegate network boundary, deployment identity, target scope, approver, verification signal, timeout, retry behavior, rollback action, and audit retention. A branch-controlled pipeline definition is executable code: protect changes to it and its templates.
+
+### Failure scenario: deployment stage reports success but service is unhealthy
+
+Check whether the step's exit status represents only API acceptance or actual workload readiness. Verify deployment status, target health, application error/latency signals, and new revision traffic. If service SLO regresses, halt later stages and use a documented rollback to the exact previous artifact. Do not retry non-idempotent migration/deployment steps automatically.
+
+Review delegate permissions independently from connector permissions. A delegate with broad network reach or a reusable privileged token can exceed the intended scope of a single pipeline.

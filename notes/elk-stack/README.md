@@ -42,3 +42,13 @@ flowchart LR
 **Troubleshooting:** cluster yellow—unassigned replicas, capacity and allocation; red—unassigned primary and data risk; indexing rejected—resource pressure, bulk sizing, mappings; query slow—shard count, expensive wildcard/aggregation, time range; disk watermark—retention, snapshots, tiering and expansion. Restore a snapshot into an isolated test cluster.
 
 **Revision:** primary shard stores a partition; replica supports resilience/read capacity; replica is not backup; mapping controls query semantics; lifecycle manages data; snapshot repository must be protected and restore-tested; Kibana is not a substitute for access controls.
+
+## Example ingest contract
+
+Before onboarding a source, define an event contract: UTC `@timestamp`, stable service/environment/host fields, numeric duration/status fields, bounded keyword dimensions, maximum event size, redaction rules, and retention class. Reject or route malformed records to a controlled dead-letter stream instead of silently indexing partial fields.
+
+An Elasticsearch index template should explicitly map fields used for filters/aggregations; do not allow arbitrary request IDs or user-provided keys to become unbounded mapped fields. Roll out template changes using a new data stream/index and reindex only with a tested migration plan. Alert on ingest rejection, delayed events, shard allocation, disk watermarks, and snapshot failures.
+
+## Incident scenario: disk watermark
+
+Stop uncontrolled ingest growth first. Inspect node disk, shard allocation, index growth, retention/lifecycle execution, and oversized fields. Do not delete indices blindly. Confirm snapshot status and retention requirements, then add capacity or safely expire approved data. Rebalance and verify cluster health/search/indexing recovery; record bytes and recovery duration.

@@ -45,3 +45,7 @@ flowchart LR
 **Troubleshooting:** perpetual diff—provider normalization, unstable computed values, or external drift; lock timeout—identify active run and backend lease before force-unlocking; replacement plan—inspect `forces replacement` attributes, lifecycle rules, and data impact; missing resource in state—check workspace/backend/credentials before importing.
 
 **Revision:** configuration describes; state maps; plan previews; apply mutates; lock prevents concurrent state operations; sensitive output redaction does not remove values from state; import associates existing object; `moved` preserves address changes; target is exceptional recovery, not routine deployment.
+
+## GCP foundation lab
+
+See [`examples/gcp-foundation/`](examples/gcp-foundation/) for a plan-only VPC/subnet/firewall example with typed variables and a required review step. It assumes an existing sandbox project and intentionally does not run apply. It is a learning module, not a landing zone; production also requires governed remote state, IAM, audit, policies, quotas, and network ownership.

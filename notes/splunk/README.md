@@ -50,3 +50,19 @@ Constrain index, sourcetype, and time early. Use `timechart` for trends, `stats`
 **Troubleshooting:** no events—forwarder/HEC connectivity, index permission, timestamp, source/sourcetype; search too slow—time bound, selective filters, cardinality, joins and index design; alert noisy—threshold/window, scheduling, suppression and missing data; ingest unexpectedly high—duplicate sources, verbose logs, sampling policy, and field bloat.
 
 **Revision:** event parsing defines fields/time; SPL filters then transforms; ingestion volume drives storage/cost; search permissions and index permissions differ; alerts need owner/action; missing telemetry must not be read as zero.
+
+## SPL runbook snippets
+
+**Error count by service, bounded to recent data:**
+
+```spl
+index=app sourcetype=service:json earliest=-15m
+| stats count(eval(status>=500)) as errors count as requests by service
+| eval error_ratio=if(requests>0, errors/requests, null())
+| where error_ratio > 0.05
+| sort - error_ratio
+```
+
+**Find ingest gaps:** compare `tstats` event volume by host/sourcetype over equal windows against a known baseline; validate `_time` and ingestion-time lag before paging. Use index-time constraints and role permissions intentionally.
+
+Before alerting, test expected event volume, no-data behavior, delayed events, duplicates, and DST/timezone boundaries. Set throttling/suppression only if it will not hide a distinct customer impact. Add owner and runbook URL to saved-search alert configuration.

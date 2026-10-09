@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="smoke" parallel="false">
+  <test name="health">
+    <classes>
+      <class name="example.HealthTest"/>
+    </classes>
+  </test>
+</suite>

@@ -47,3 +47,7 @@ flowchart LR
 **Troubleshooting:** training result irreproducible—missing data/code/environment version; serving mismatch—feature transformation skew; accuracy drop—label delay, cohort shift, pipeline bug or concept drift; model unavailable—artifact permissions, runtime compatibility, capacity and health checks.
 
 **Revision:** model != full ML system; registry records candidates; data lineage matters; offline quality != online impact; monitor both system and model; rollback to known model; re-training must be governed and evaluated.
+
+## Reproducible experiment lab
+
+See [`examples/train.py`](examples/train.py) for a small MLflow-tracked classification experiment. It demonstrates deterministic split, metrics, parameters, and artifact logging only. It is not a production training pipeline: add versioned input data, schema/quality checks, dependency lock, model card, fairness/security evaluation, registry approval, and deployment/monitoring gates before reuse.

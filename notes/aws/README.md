@@ -1,67 +1,48 @@
-# AWS for DevOps
+# AWS: production engineering guide
 
-## Mental model
+## Chapter map
 
-AWS is a collection of regional services. An account is the security and billing boundary; a Region contains independent service deployments; Availability Zones provide fault isolation within a Region. Design around failure of individual instances, zones, credentials, and deployments rather than assuming infrastructure is permanent.
+| Chapter | Scope |
+|---|---|
+| [Architecture and accounts](architecture.md) | Organizations, account boundaries, Region/AZ, landing-zone controls |
+| [IAM and security](iam-security.md) | Roles, federation, policies, secrets, audit |
+| [VPC networking](networking.md) | Subnets, routing, endpoints, NAT, load balancing, troubleshooting |
+| [Operations lab](operations-lab.md) | Delivery, observability, recovery, incident scenario |
 
-## Core building blocks
+These are original learning notes, not a reproduction of a paid handbook. Validate current AWS service behavior, quotas, pricing, and region support before applying designs.
 
-- **Identity:** IAM users, roles, policies, and federation. Prefer short-lived role credentials and narrowly scoped permissions over long-lived access keys.
-- **Networking:** VPCs, subnets, route tables, security groups, and network ACLs. Public/private placement and explicit egress paths are key design choices.
-- **Compute and data:** EC2, ECS/EKS, Lambda, S3, RDS, and DynamoDB solve different workload and operational needs. Choose based on control, scaling, consistency, and operations—not fashion.
-- **Operations:** CloudWatch metrics/logs/alarms, CloudTrail audit events, Systems Manager, and cost allocation tags.
-
-## Delivery workflow
-
-1. Establish organization/account guardrails, identity federation, logging, and budgets.
-2. Define infrastructure as code; review plans and protect state/secrets.
-3. Build immutable artifacts, scan them, and publish to controlled registries.
-4. Deploy through staged environments with health checks, alarms, and rollback.
-5. Test recovery, permissions, and cost assumptions continuously.
-
-## Security and reliability
-
-Use least privilege, encryption in transit and at rest, private networking where appropriate, and managed secret storage. Separate production access and deployment roles. Multi-AZ improves availability but does not replace backups or disaster-recovery tests. Define RTO/RPO, verify restore procedures, and monitor service quotas and spend.
-
-## Practice
-
-Build a private application tier behind a load balancer, store data in a managed database, and expose only required paths. Add role-based deployment, centralized logs, an availability alarm, and a tested backup restore. Explain the blast radius if one AZ or one credential is compromised.
-
-## Further reading
-
-[AWS Well-Architected Framework](https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html) · [IAM best practices](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html)
-
-## Topic roadmap and examples
-
-### Accounts, IAM, and governance
-
-Use Organizations/accounts to isolate workloads and environments; SCPs constrain maximum permissions but do not grant access. A role trust policy determines who can assume a role; its permissions policy determines what the role can do. Example: a CI role trusted by the CI OIDC provider may deploy only to staging and read one artifact repository. Never confuse an identity policy with a resource policy.
-
-### VPC and traffic paths
+## Reference production path
 
 ```mermaid
 flowchart LR
-  U[Users] --> ALB[Public load balancer]
-  ALB --> APP[Private app subnets]
-  APP --> DB[(Private database)]
-  APP --> NAT[NAT / controlled egress]
-  NAT --> EXT[External services]
+  User[Client] --> Edge[Route 53 + CloudFront / WAF]
+  Edge --> ALB[Public ALB]
+  ALB --> App[Private ECS / EKS / EC2 tier]
+  App --> DB[(Private RDS)]
+  App --> Secrets[Secrets Manager]
+  App --> Obs[CloudWatch + CloudTrail]
+  CI[OIDC CI role] --> ECR[ECR immutable image]
+  CI --> Deploy[Staged deployment]
+  Audit[Organization CloudTrail] --> Sec[Security account]
 ```
 
-Trace packets with subnet routes, security-group stateful rules, network ACLs, DNS, and load-balancer health checks. Private subnets are not automatically isolated if they have unrestricted egress.
+The components are alternatives and require service-specific design. Do not route every workload through a public subnet or grant account-wide deployment permissions. Use a sandbox account and inspect cost before creating resources.
 
-### Compute, storage, and data
+## Study path
 
-Select EC2 for OS/control needs, ECS/EKS for container orchestration, Lambda for event-driven functions, S3 for object storage, RDS for managed relational databases, and DynamoDB for key-value/document access patterns. Consider availability, latency, consistency, backup/restore, limits, and operational burden. S3 versioning helps recover from overwrite/deletion but is not a complete isolated backup strategy.
+Establish account/identity guardrails; design network and workload permissions; deploy an immutable artifact; add service-level observability; then rehearse AZ failure, rollback, and data restore. [Architecture](architecture.md) → [Identity](iam-security.md) → [Networking](networking.md) → [Operations lab](operations-lab.md).
 
-### Delivery, observability, and recovery
+---
 
-Build once, sign/scan artifacts, deploy by immutable digest, and promote through stages. CloudTrail answers who changed what; CloudWatch provides metrics/logs/alarms; service health and application SLIs answer different questions. Define RTO/RPO and test recovery in a separate failure domain.
+## Quick reference
 
-### Troubleshooting example
+| Need | Chapter |
+|---|---|
+| Account structure, AZ/Region, landing zone | [Architecture](architecture.md) |
+| Role trust, workload federation, secrets, audit | [IAM and security](iam-security.md) |
+| VPC flow, private service, hybrid connectivity | [Networking](networking.md) |
+| Delivery, telemetry, DR and failure exercise | [Operations lab](operations-lab.md) |
 
-**Symptom:** application instances time out connecting to a database. Verify DNS resolution and endpoint/port first; inspect DB security-group ingress from the app security group, subnet routes, NACL return traffic, connection limits, TLS settings, and DB health. Avoid opening the database to `0.0.0.0/0` as a diagnostic shortcut.
+**Revision:** account is a useful security/billing boundary; SCP constrains but does not grant; role trust differs from permissions; security groups are stateful and NACLs stateless; NAT is egress; multi-AZ is not a backup; CloudTrail is not application telemetry.
 
-### Revision
-
-Account boundary ≠ VPC boundary; security groups are stateful; NACLs are stateless; IAM role trust ≠ role permissions; multi-AZ ≠ backup; CloudTrail ≠ application logs; tags support ownership/cost but do not grant authorization.
+**Official references:** [AWS Well-Architected Framework](https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html) · [IAM best practices](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html)

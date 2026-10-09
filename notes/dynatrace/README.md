@@ -45,3 +45,11 @@ flowchart LR
 **Troubleshooting:** agent not reporting—host connectivity, token/scope, proxy/firewall, version/health; service missing—process detection/instrumentation, naming, filters; alert storm—threshold, baseline, deduplication/correlation and ownership; unexplained blind spot—ingestion limits, sampling, retention, and excluded entities.
 
 **Revision:** metrics show aggregates; traces show request paths; logs provide events; topology adds context; correlation helps prioritization but needs validation; token scope and data capture settings are security controls.
+
+## Query and alert design
+
+Build a service-level dashboard around request count, error ratio, latency percentiles, saturation, and dependency health. A metric selector or DQL query must filter to the intended entity/service and timeframe; validate field names in the tenant's current schema instead of pasting an unverified query into production. Alert on sustained user impact, not a single host threshold. Link alert profiles to service ownership and an actionable runbook.
+
+## Production rollout checklist
+
+Roll out agents/integrations to a canary host pool first. Measure CPU/memory/network overhead, verify process/service topology and data completeness, then expand by environment. Pin supported agent versions and test upgrades. Establish proxy/egress allowlists, API-token rotation, privacy filters, data retention, and a procedure for agent outage. Keep a telemetry gap visible as an incident condition.

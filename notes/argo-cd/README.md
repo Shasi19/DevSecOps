@@ -41,3 +41,7 @@ flowchart LR
 **Troubleshooting:** `OutOfSync`—compare rendered desired and live diff, check ignored fields/controllers; `Unknown`—repo rendering, API/RBAC, or connectivity; `Healthy` but app broken—health checks may not capture user SLO; repeated sync failure—inspect admission errors, ownership conflicts, immutable fields, and sync permissions.
 
 **Revision:** Git defines desired state; controller reconciles; sync status is not health; health is not an SLO; prune is destructive; revert Git for auditable rollback; protect the repo and Argo control plane as deployment authorities.
+
+## Minimal staged Application example
+
+See [`examples/application.yaml`](examples/application.yaml). It is a template with a reserved example repository URL; replace the repository, path, revision, project, and destination after creating a restrictive AppProject. Auto-sync is enabled but prune is disabled intentionally. Review all rendered manifests and test in staging before enabling any destructive reconciliation.

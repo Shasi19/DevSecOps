@@ -65,3 +65,7 @@ Validate configuration before reload in real deployments (for example, with a mo
 **Troubleshooting:** unreachable—SSH user/key, route, host-key and Python runtime; undefined variable—inventory/group precedence and spelling; task reports changed every run—use the correct module/state or command `creates`/`changed_when`; handler did not run—confirm task changed and handler name notification matches.
 
 **Revision:** inventory selects hosts; modules express state; playbooks orchestrate; roles package; handlers react to change; Vault protects at rest, not after decryption; check mode support is module-specific; idempotency must be verified by a second run.
+
+## Production web-server role example
+
+See [`examples/`](examples/) for an inventory-free playbook and template. The example is Debian-family specific and intentionally targets a lab host group. First inspect with `--check --diff`; use a disposable VM, then validate the rendered NGINX config before enabling the service. For production, pin Ansible/collection versions, use controlled inventory, SSH host-key verification, and an approved secret manager.

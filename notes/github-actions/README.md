@@ -56,3 +56,11 @@ Use `GITHUB_TOKEN` permissions minimally. OIDC tokens can exchange workflow iden
 **Troubleshooting:** job stuck—check runner labels/capacity and concurrency; auth denied—inspect token scope, event type (forks), OIDC subject/audience, and environment protection; artifact not found—check job dependency, artifact name/retention, and run ID; intermittent test—separate product/test/runner causes before adding retries.
 
 **Revision:** workflow YAML is executable policy; `needs` controls dependency order; environment approval protects deployment, not build; secrets masking does not prevent exfiltration; pinning protects against mutable action tags.
+
+## Copyable validation workflow
+
+See [`examples/ci.yml`](examples/ci.yml). It runs tests with a read-only token and pins checkout to a reviewed immutable commit. Review and update pinned action SHAs through your dependency process; verify the SHA corresponds to the intended upstream release. The example intentionally has no deployment credentials or cloud permission.
+
+## Webhook receiver controls
+
+For a webhook receiver, verify the provider's signature against the **exact raw request bytes** before parsing JSON, using a constant-time comparison. Enforce body-size limits, validate event type and schema, and durably enqueue before returning success. Persist delivery IDs to deduplicate retries; signatures authenticate origin/integrity but do not prevent replay. Keep the secret in a secret manager, rotate it, avoid logging payloads, and verify current repository/installation permissions before taking actions.

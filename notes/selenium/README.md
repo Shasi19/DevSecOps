@@ -42,3 +42,7 @@ flowchart LR
 **Troubleshooting:** element not found—wrong frame/window, stale locator, changed DOM or timing; click intercepted—overlay/scroll/animation; flaky CI—resource contention, data collision, timezone/locale, network or implicit/explicit wait mix; session cannot start—browser/driver capability mismatch or Grid capacity.
 
 **Revision:** explicit waits for conditions; tests isolated and repeatable; retries can mask product defects; page objects should not hide assertions; Grid is a capacity and trust boundary; failures need useful artifacts without secret leakage.
+
+## Java/TestNG example project
+
+See [`examples/java-testng/`](examples/java-testng/) for a Maven test with explicit wait, per-test browser lifecycle, optional Selenium Grid, and failure screenshot. It expects an application contract: a page element with `data-testid="service-status"` and accessible text `ready`. Adapt locators to your app. Screenshots may contain customer data; retain them only under approved CI artifact controls.

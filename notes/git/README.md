@@ -49,3 +49,25 @@ gitGraph
 **Troubleshooting:** `non-fast-forward` means remote history advanced—fetch, inspect divergence, then integrate. A secret committed but not pushed should be removed from history and rotated if real; if pushed, revoke/rotate immediately before considering history rewrite. `.gitignore` does not untrack a file already committed (`git rm --cached` does).
 
 **Revision:** fetch downloads refs; merge preserves branch topology; rebase replays commits and changes IDs; revert is history-safe undo; reset moves a ref; stash is temporary; reflog is local recovery, not remote backup.
+
+## Team workflow lab
+
+```bash
+git switch main
+git fetch origin --prune
+git pull --ff-only
+git switch -c feature/health-check
+# make a focused change
+git diff --check
+git diff
+git add -p
+git diff --cached
+git commit -m "Add bounded health check"
+git push -u origin feature/health-check
+```
+
+Before opening a pull request, run targeted tests, confirm no generated files/secrets are staged, and include risk/rollback notes. If the remote branch advanced, fetch and inspect the graph before integrating. Rebase rewrites your local commits and should not be used on a shared branch unless the team coordinates it.
+
+## Secret exposure response
+
+If a credential enters a commit: revoke/rotate immediately, assess access logs and scope, remove it from active code/history where appropriate, notify the security owner, and prevent recurrence with secret scanning. History rewrite does not invalidate a credential or erase clones/caches. Do not wait for a history cleanup before rotation.
