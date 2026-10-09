@@ -54,3 +54,7 @@ flowchart LR
 ## Build lab
 
 See [`examples/`](examples/) for a runnable minimal HTTP image, `.dockerignore`, and hardened local run commands. The example uses a readable base tag for buildability; pin an approved immutable digest in production and keep updating it through a patch process.
+
+## End-to-end container lifecycle
+
+See [`process.md`](process.md) for application analysis, Dockerfile design, local build/run, image scanning/publishing, deployment handoff, runtime checks, and cleanup.

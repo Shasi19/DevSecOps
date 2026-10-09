@@ -66,3 +66,7 @@ echo $?
 ```
 
 Do not use this as a full production SLI probe without reviewing TLS verification, proxy behavior, expected status/body, retry policy, and secret redaction. A single successful request is not a complete availability measurement.
+
+## End-to-end Python automation process
+
+See [`process.md`](process.md) for project/virtualenv setup, CLI/API design, exception and retry policy, tests, packaging, deployment, and secret-safe operations.

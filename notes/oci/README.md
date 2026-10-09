@@ -50,3 +50,7 @@ Begin in a compartment for a non-production lab. Create the network and IAM cont
 | IaC delivery, recovery, operations lab | [Delivery and operations](operations-lab.md) |
 
 **Revision:** tenancy is root; compartment scopes organization/policy; policies authorize; routes and security rules control different network layers; NAT is egress, IGW supports public paths, Service Gateway reaches supported Oracle services; backup must be independently protected and restore-tested.
+
+## Create and operate a VM
+
+For OCI Compute use cases, launch prerequisites, private instance CLI flow, Bastion access, identity, verification, troubleshooting, and termination, follow [`vm-instance.md`](vm-instance.md).

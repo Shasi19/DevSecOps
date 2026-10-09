@@ -46,3 +46,7 @@ flowchart LR
 **Troubleshooting an interview answer:** if the design sprawls, return to requirements and draw one request path; if capacity estimates are questioned, show assumptions and arithmetic; if a proposed component adds complexity, compare it with the simplest baseline; if a behavioural story lacks impact, clarify your role and the verifiable result without inventing metrics.
 
 **Revision framework:** clarify → estimate → draw baseline → walk one request/write path → identify bottleneck/failure → secure it → add observability/recovery → state trade-offs. For STAR, keep Situation/Task brief; focus on your Actions and verifiable Result; close with learning.
+
+## Repeatable interview preparation process
+
+See [`process.md`](process.md) for competency inventory, STAR story development, timed system-design practice, feedback, and ethical follow-up preparation.

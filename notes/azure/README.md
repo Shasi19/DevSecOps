@@ -46,3 +46,7 @@ Choose components based on requirements; the diagram is not a deployment bluepri
 **Revision:** tenant is identity; management groups organize subscriptions; subscription is a billing/quota boundary; RBAC grants; Policy constrains; private endpoint requires correct DNS and does not automatically disable public access; backup needs restore evidence.
 
 **Official references:** [Azure Well-Architected Framework](https://learn.microsoft.com/azure/well-architected/) · [Azure RBAC](https://learn.microsoft.com/azure/role-based-access-control/overview)
+
+## Create and operate a VM
+
+For a private Azure Linux VM, use cases, sandbox CLI workflow, managed identity, Bastion access, verification, troubleshooting, and safe teardown, follow [`vm-instance.md`](vm-instance.md).

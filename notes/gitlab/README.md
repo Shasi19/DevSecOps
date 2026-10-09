@@ -45,6 +45,10 @@ Use protected variables only in trusted refs/environments. A masked variable can
 
 **Revision:** cache is disposable acceleration, artifact is an output; rules decide whether jobs exist; runner is part of the trust boundary; protected variables must never reach untrusted pipeline code.
 
+## End-to-end GitLab project workflow
+
+See [`process.md`](process.md) for repository setup, protected branches, merge-request validation, runner isolation, artifact promotion, protected deploys, and pipeline debugging.
+
 ## Copyable CI skeleton
 
 See [`examples/.gitlab-ci.yml`](examples/.gitlab-ci.yml) for validation of this notes repository. It intentionally has no generic build or deployment: packaging all repository files can accidentally publish tracked credentials, and application builds are language-specific. Add an artifact stage only after defining an explicit allowlist, secret scan, provenance, and immutable registry; configure production deployment separately behind protected environments and a short-lived identity. Pin the CI image by approved digest in production.

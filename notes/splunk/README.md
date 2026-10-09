@@ -66,3 +66,7 @@ index=app sourcetype=service:json earliest=-15m
 **Find ingest gaps:** compare `tstats` event volume by host/sourcetype over equal windows against a known baseline; validate `_time` and ingestion-time lag before paging. Use index-time constraints and role permissions intentionally.
 
 Before alerting, test expected event volume, no-data behavior, delayed events, duplicates, and DST/timezone boundaries. Set throttling/suppression only if it will not hide a distinct customer impact. Add owner and runbook URL to saved-search alert configuration.
+
+## End-to-end Splunk onboarding
+
+See [`process.md`](process.md) for source inventory, forwarder/HEC onboarding, parsing, SPL validation, dashboard/alert deployment, ingest-cost review, and source retirement.

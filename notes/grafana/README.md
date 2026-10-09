@@ -51,3 +51,7 @@ Provision folders, datasources, dashboards, and alert rules from version control
 ## Incident workflow example
 
 When an alert fires, dashboard should show SLI trend, affected service/region/revision, and deployment annotations. Link to the alert rule and runbook. During an incident, narrow dashboard variables and time range, compare healthy vs failing slices, and use trace/log links for drill-down. An empty panel may indicate no traffic, missing series, query error, or backend delay—not necessarily zero errors.
+
+## End-to-end dashboard process
+
+See [`process.md`](process.md) for datasource onboarding, dashboard provisioning, alert configuration, access control, testing, incident use, and dashboard lifecycle.

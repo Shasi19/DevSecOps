@@ -46,3 +46,7 @@ flowchart LR
 ## Runnable configuration lab
 
 See [`examples/`](examples/) for a minimal scrape config and alert rules. Replace the example app endpoint and metric names with instrumentation that actually exists. Check syntax with `promtool check config` and `promtool check rules`; use `promtool test rules` with test fixtures before production. The rules are examples, not an SLO policy.
+
+## End-to-end monitoring process
+
+See [`process.md`](process.md) for instrumenting a service, configuring discovery/scrapes, writing and testing PromQL rules, routing alerts, operating storage, and diagnosing missing/high-cardinality data.

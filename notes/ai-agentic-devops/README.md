@@ -66,3 +66,7 @@ Record model/version, policy version, retrieved source identifiers, tool identit
 ## Safe rollout
 
 Start read-only on synthetic or approved low-sensitivity data; compare responses with human-reviewed ground truth; shadow against existing operations without action authority. Add one narrowly scoped tool only after evaluation and audit controls pass. Roll back by disabling the tool identity/route, not by relying on a prompt instruction.
+
+## End-to-end agent implementation process
+
+See [`process.md`](process.md) for use-case selection, data/tool boundaries, a human-approved execution loop, evaluation, staged rollout, incident shutdown, and retirement.

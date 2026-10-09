@@ -43,3 +43,7 @@ flowchart LR
 **Troubleshooting an interview answer:** if the prompt is underspecified, ask about user impact and constraints; if many actions compete, state severity and risk criteria; if recovery is uncertain, prefer reversible containment and define a verification signal; if an SLO is proposed without measurement, identify the SLI and window first.
 
 **Revision:** SLI measures; SLO target; SLA commitment; error budget informs risk; alert on actionable symptoms; postmortem blameless does not mean no accountability; every action has an owner, due date, and measurable verification.
+
+## Repeatable SRE/managerial scenario process
+
+See [`process.md`](process.md) for clarifying impact, forming an incident response, choosing reversible mitigation, communicating, validating recovery, and conducting a blameless review.

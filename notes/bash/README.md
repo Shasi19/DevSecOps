@@ -65,3 +65,7 @@ fi
 ## Health-check script lab
 
 See [`examples/check-health.sh`](examples/check-health.sh). It validates an HTTPS URL and bounds curl runtime. It deliberately has no retry loop: add retries only for classified transient failures and ensure the caller's deadline remains bounded. Run with `bash examples/check-health.sh https://service.example/healthz`; test a failure against a controlled endpoint.
+
+## End-to-end Bash automation process
+
+See [`process.md`](process.md) for script contract, argument/credential validation, safe side effects, retries/locking, testing, observability, and deployment.
