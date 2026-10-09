@@ -47,3 +47,7 @@ flowchart LR
 ## Repeatable SRE/managerial scenario process
 
 See [`process.md`](process.md) for clarifying impact, forming an incident response, choosing reversible mitigation, communicating, validating recovery, and conducting a blameless review.
+
+## Visual study cards
+
+Browse the [10 original visual study cards](visuals/README.md) as SVG or PNG, covering architecture, workflow, security, delivery, observability, troubleshooting, recovery, resilience, scenarios, and revision.

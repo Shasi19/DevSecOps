@@ -54,3 +54,7 @@ Begin in a compartment for a non-production lab. Create the network and IAM cont
 ## Create and operate a VM
 
 For OCI Compute use cases, launch prerequisites, private instance CLI flow, Bastion access, identity, verification, troubleshooting, and termination, follow [`vm-instance.md`](vm-instance.md).
+
+## Visual study cards
+
+Browse the [10 original visual study cards](visuals/README.md) as SVG or PNG, covering architecture, workflow, security, delivery, observability, troubleshooting, recovery, resilience, scenarios, and revision.

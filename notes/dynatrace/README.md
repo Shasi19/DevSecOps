@@ -57,3 +57,7 @@ Roll out agents/integrations to a canary host pool first. Measure CPU/memory/net
 ## End-to-end onboarding process
 
 See [`process.md`](process.md) for service discovery, canary agent rollout, entity/service ownership, dashboards/alerts, incident triage, and safe offboarding.
+
+## Visual study cards
+
+Browse the [10 original visual study cards](visuals/README.md) as SVG or PNG, covering architecture, workflow, security, delivery, observability, troubleshooting, recovery, resilience, scenarios, and revision.

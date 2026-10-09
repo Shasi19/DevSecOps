@@ -55,3 +55,7 @@ See [`examples/train.py`](examples/train.py) for a small MLflow-tracked classifi
 ## End-to-end MLOps process
 
 See [`process.md`](process.md) for data contract/versioning, experiment creation, evaluation gates, model registration, deployment/canary, monitoring, rollback, and retraining approval.
+
+## Visual study cards
+
+Browse the [10 original visual study cards](visuals/README.md) as SVG or PNG, covering architecture, workflow, security, delivery, observability, troubleshooting, recovery, resilience, scenarios, and revision.

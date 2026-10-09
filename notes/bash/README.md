@@ -69,3 +69,7 @@ See [`examples/check-health.sh`](examples/check-health.sh). It validates an HTTP
 ## End-to-end Bash automation process
 
 See [`process.md`](process.md) for script contract, argument/credential validation, safe side effects, retries/locking, testing, observability, and deployment.
+
+## Visual study cards
+
+Browse the [10 original visual study cards](visuals/README.md) as SVG or PNG, covering architecture, workflow, security, delivery, observability, troubleshooting, recovery, resilience, scenarios, and revision.

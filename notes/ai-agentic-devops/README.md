@@ -70,3 +70,7 @@ Start read-only on synthetic or approved low-sensitivity data; compare responses
 ## End-to-end agent implementation process
 
 See [`process.md`](process.md) for use-case selection, data/tool boundaries, a human-approved execution loop, evaluation, staged rollout, incident shutdown, and retirement.
+
+## Visual study cards
+
+Browse the [10 original visual study cards](visuals/README.md) as SVG or PNG, covering architecture, workflow, security, delivery, observability, troubleshooting, recovery, resilience, scenarios, and revision.

@@ -57,3 +57,7 @@ See [`language-patterns.md`](language-patterns.md) for fully worked `count`, `fo
 ## End-to-end infrastructure process
 
 See [`process.md`](process.md) for module design, backend setup, CI permissions, plan review, apply, drift/import recovery, and teardown.
+
+## Visual study cards
+
+Browse the [10 original visual study cards](visuals/README.md) as SVG or PNG, covering architecture, workflow, security, delivery, observability, troubleshooting, recovery, resilience, scenarios, and revision.

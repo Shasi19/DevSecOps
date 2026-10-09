@@ -58,3 +58,7 @@ Review delegate permissions independently from connector permissions. A delegate
 ## End-to-end Harness pipeline process
 
 See [`process.md`](process.md) for connector/delegate setup, service/environment modeling, pipeline creation, artifact promotion, approval/verification, failure response, and secret/credential cleanup.
+
+## Visual study cards
+
+Browse the [10 original visual study cards](visuals/README.md) as SVG or PNG, covering architecture, workflow, security, delivery, observability, troubleshooting, recovery, resilience, scenarios, and revision.

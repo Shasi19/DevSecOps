@@ -50,3 +50,7 @@ Choose components based on requirements; the diagram is not a deployment bluepri
 ## Create and operate a VM
 
 For a private Azure Linux VM, use cases, sandbox CLI workflow, managed identity, Bastion access, verification, troubleshooting, and safe teardown, follow [`vm-instance.md`](vm-instance.md).
+
+## Visual study cards
+
+Browse the [10 original visual study cards](visuals/README.md) as SVG or PNG, covering architecture, workflow, security, delivery, observability, troubleshooting, recovery, resilience, scenarios, and revision.

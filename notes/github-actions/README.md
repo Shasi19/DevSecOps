@@ -68,3 +68,7 @@ For a webhook receiver, verify the provider's signature against the **exact raw 
 ## End-to-end workflow setup
 
 See [`process.md`](process.md) for workflow creation, least-privilege permission selection, validation, artifact promotion, protected deployment, and fork-PR testing.
+
+## Visual study cards
+
+Browse the [10 original visual study cards](visuals/README.md) as SVG or PNG, covering architecture, workflow, security, delivery, observability, troubleshooting, recovery, resilience, scenarios, and revision.

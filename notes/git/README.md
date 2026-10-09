@@ -75,3 +75,7 @@ If a credential enters a commit: revoke/rotate immediately, assess access logs a
 ## End-to-end team workflow
 
 See [`process.md`](process.md) for the issue-to-release process, required review/test gates, conflict recovery, rollback, and leaked-secret response.
+
+## Visual study cards
+
+Browse the [10 original visual study cards](visuals/README.md) as SVG or PNG, covering architecture, workflow, security, delivery, observability, troubleshooting, recovery, resilience, scenarios, and revision.

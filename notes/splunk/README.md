@@ -70,3 +70,7 @@ Before alerting, test expected event volume, no-data behavior, delayed events, d
 ## End-to-end Splunk onboarding
 
 See [`process.md`](process.md) for source inventory, forwarder/HEC onboarding, parsing, SPL validation, dashboard/alert deployment, ingest-cost review, and source retirement.
+
+## Visual study cards
+
+Browse the [10 original visual study cards](visuals/README.md) as SVG or PNG, covering architecture, workflow, security, delivery, observability, troubleshooting, recovery, resilience, scenarios, and revision.

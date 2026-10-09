@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900">
+<defs><linearGradient id="wash" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e6a35b" stop-opacity=".17"/><stop offset="1" stop-color="#e6a35b" stop-opacity="0"/></linearGradient><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#e6a35b"/></marker></defs>
+<rect x="0" y="0" width="1440" height="900" rx="0" fill="#0a1020" stroke="none"/>
+<circle cx="1340" cy="95" r="220" fill="url(#wash)"/>
+<path d="M64 146H1376" stroke="#293955" stroke-width="2"/>
+<rect x="64" y="48" width="52" height="52" rx="15" fill="#e6a35b" stroke="none"/>
+<text x="76" y="82" fill="#0a1020" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="800">BEH</text>
+<text x="132" y="70" fill="#e6a35b" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="750">BEHAVIOURAL AND SYSTEM DESIGN</text>
+<text x="132" y="99" fill="#aab8d0" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600">FIELD GUIDE  /  VISUAL SERIES</text>
+<rect x="1196" y="51" width="180" height="42" rx="20" fill="#111b30" stroke="#293955"/>
+<text x="1220" y="78" fill="#f3f6ff" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700">07  /  10</text>
+<text x="68" y="205" fill="#e6a35b" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="750">RECOVERY</text>
+<text x="68" y="250" fill="#f3f6ff" font-family="Arial,Helvetica,sans-serif" font-size="38" font-weight="750">Failure recovery</text>
+<text x="68" y="298" fill="#aab8d0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="500">Stabilize first, restore from a known-good point, then verify.</text>
+<circle cx="176" cy="366" r="21" fill="#e6a35b" fill-opacity=".18"/><text x="169" y="372" fill="#e6a35b" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="700">1</text><rect x="220" y="330" width="955" height="74" rx="16" fill="#111b30" stroke="#293955"/><text x="250" y="361" fill="#f3f6ff" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600">Detect</text><path d="M176 389 V426" stroke="#e6a35b" stroke-width="3"/><circle cx="176" cy="462" r="21" fill="#e6a35b" fill-opacity=".18"/><text x="169" y="468" fill="#e6a35b" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="700">2</text><rect x="220" y="426" width="955" height="74" rx="16" fill="#111b30" stroke="#293955"/><text x="250" y="457" fill="#f3f6ff" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600">contain</text><path d="M176 485 V522" stroke="#e6a35b" stroke-width="3"/><circle cx="176" cy="558" r="21" fill="#e6a35b" fill-opacity=".18"/><text x="169" y="564" fill="#e6a35b" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="700">3</text><rect x="220" y="522" width="955" height="74" rx="16" fill="#111b30" stroke="#293955"/><text x="250" y="553" fill="#f3f6ff" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600">restore from safe state</text><path d="M176 581 V618" stroke="#e6a35b" stroke-width="3"/><circle cx="176" cy="654" r="21" fill="#e6a35b" fill-opacity=".18"/><text x="169" y="660" fill="#e6a35b" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="700">4</text><rect x="220" y="618" width="955" height="74" rx="16" fill="#111b30" stroke="#293955"/><text x="250" y="649" fill="#f3f6ff" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600">validate / learn</text>
+<rect x="64" y="730" width="1312" height="106" rx="20" fill="#111b30" stroke="#293955"/>
+<rect x="86" y="754" width="7" height="56" rx="4" fill="#e6a35b" stroke="none"/>
+<text x="116" y="773" fill="#e6a35b" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="750">PRODUCTION CHECK</text>
+<text x="116" y="805" fill="#f3f6ff" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="550">Prefer reversible mitigations before complex permanent fixes during an outage.</text>
+<text x="68" y="872" fill="#aab8d0" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600">DEVSECOPS STUDY NOTES   •   ORIGINAL LEARNING GRAPHIC</text>
+<text x="1160" y="872" fill="#aab8d0" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600">Behavioural and System Design</text>
+</svg>

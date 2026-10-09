@@ -67,3 +67,7 @@ See [`process.md`](process.md) for repository creation, protected branch setup, 
 ## Revision
 
 Branch rules govern merges, not runtime cloud access; CODEOWNERS routes review but does not enforce least privilege; environment approval does not make a malicious workflow safe; token permission should be explicit; releases need artifact-to-commit provenance.
+
+## Visual study cards
+
+Browse the [10 original visual study cards](visuals/README.md) as SVG or PNG, covering architecture, workflow, security, delivery, observability, troubleshooting, recovery, resilience, scenarios, and revision.

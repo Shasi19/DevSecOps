@@ -50,3 +50,7 @@ Establish account/identity guardrails; design network and workload permissions; 
 For EC2 use cases, prerequisites, a private launch command, Session Manager access, verification, troubleshooting, and termination checks, follow [`vm-instance.md`](vm-instance.md).
 
 **Official references:** [AWS Well-Architected Framework](https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html) · [IAM best practices](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html)
+
+## Visual study cards
+
+Browse the [10 original visual study cards](visuals/README.md) as SVG or PNG, covering architecture, workflow, security, delivery, observability, troubleshooting, recovery, resilience, scenarios, and revision.
