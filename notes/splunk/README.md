@@ -23,3 +23,30 @@ Ingest sample application logs, validate timestamps and fields, create a dashboa
 ## Further reading
 
 [Splunk documentation](https://docs.splunk.com/Documentation)
+
+## Topic roadmap and SPL example
+
+```mermaid
+flowchart LR
+  SRC[Applications / hosts] --> FWD[Forwarder / HEC]
+  FWD --> PARSE[Parsing + timestamp]
+  PARSE --> IDX[Indexers]
+  IDX --> SEARCH[Search head + SPL]
+  SEARCH --> DASH[Dashboard / alert]
+  DASH --> TEAM[Owning operator]
+```
+
+**Data flow:** forwarders/HEC receive events; parsing assigns timestamps, host, source, and sourcetype; indexers store searchable data; search heads execute SPL; dashboards/reports/alerts present results. Index-time and search-time processing have different cost and flexibility trade-offs. Validate timestamp extraction/timezone before tuning searches.
+
+```spl
+index=app sourcetype=service:json earliest=-15m
+| stats count as requests count(eval(status>=500)) as errors by service
+| eval error_pct=100*errors/requests
+| sort - error_pct
+```
+
+Constrain index, sourcetype, and time early. Use `timechart` for trends, `stats` for aggregation, `eval` for derived fields, and joins/lookups selectively because they can be expensive. Redact credentials/PII before indexing and keep retention aligned to purpose and policy.
+
+**Troubleshooting:** no events—forwarder/HEC connectivity, index permission, timestamp, source/sourcetype; search too slow—time bound, selective filters, cardinality, joins and index design; alert noisy—threshold/window, scheduling, suppression and missing data; ingest unexpectedly high—duplicate sources, verbose logs, sampling policy, and field bloat.
+
+**Revision:** event parsing defines fields/time; SPL filters then transforms; ingestion volume drives storage/cost; search permissions and index permissions differ; alerts need owner/action; missing telemetry must not be read as zero.

@@ -25,3 +25,27 @@ Diagnose a service that cannot bind to its port, one blocked by file permissions
 ## Further reading
 
 [Linux man-pages](https://man7.org/linux/man-pages/) · [systemd documentation](https://www.freedesktop.org/wiki/Software/systemd/)
+
+## Topic roadmap and incident example
+
+```mermaid
+flowchart LR
+  APP[Process] --> SYSCALL[Kernel system calls]
+  SYSCALL --> CPU[CPU scheduler]
+  SYSCALL --> FS[Filesystem / block device]
+  SYSCALL --> NET[Network stack]
+  ADMIN[systemd + logs] --> APP
+  ADMIN --> OBS[Metrics / journal]
+```
+
+**Boot and services:** systemd units describe services, sockets, timers, and dependencies. `systemctl status` gives current state; `journalctl -u NAME --since ...` narrows logs. A service can be active while its endpoint is unhealthy—check process, listener, and application response separately.
+
+**Processes and resources:** signals request actions (`TERM` graceful, `KILL` forceful); inspect process tree and open files before terminating. Load average is not CPU percent. Check memory pressure, I/O wait, cgroup limits, and disk/inode exhaustion. Permissions combine owner/group/mode, ACLs, capabilities, and mandatory controls.
+
+**Network and storage:** resolve DNS, inspect routes and listeners, then test connectivity at each hop. Filesystems, mounts, inode availability, quotas, and permissions all affect writes. Use `ss`, `ip`, `dig`, `curl`, `df`, `du`, `find`, `lsof`, and logs based on the layer under test.
+
+**Scenario:** disk alert. Identify the full filesystem with `df -h`; inspect inodes with `df -i`; find growth with targeted `du`/`find`; inspect deleted-but-open files; verify log rotation and retention. Do not blindly delete active data or reboot without capturing evidence.
+
+**Troubleshooting:** connection refused usually means no listener or active rejection; timeout suggests path/filter/drop or unresponsive target; DNS failure precedes TCP; permission denied requires checking user, path traversal permissions, mount flags, ACLs, and SELinux/AppArmor.
+
+**Revision:** process != service; load != CPU; free disk != free inodes; DNS, routing, firewall, listener, TLS, and app response are separate layers; collect evidence before restarting.

@@ -21,3 +21,23 @@ Create a pipeline that tests a pull request, publishes a versioned artifact on a
 ## Further reading
 
 [Jenkins documentation](https://www.jenkins.io/doc/)
+
+## Topic roadmap and pipeline design
+
+**Controller and agents:** controller stores configuration and schedules work; agents execute steps with their own OS/network/credentials. Labels route jobs but do not enforce isolation. Prefer ephemeral agents and distinct trust pools for untrusted PRs and protected releases.
+
+```mermaid
+flowchart LR
+  SCM[SCM webhook] --> CTRL[Jenkins controller]
+  CTRL --> AGENT[Ephemeral build agent]
+  AGENT --> TEST[Test + scan]
+  TEST --> ART[Immutable artifact]
+  ART --> APPROVE[Protected approval]
+  APPROVE --> DEPLOY[Deploy agent / target]
+```
+
+**Pipeline topics:** declarative stages, scripted steps, shared libraries, credentials binding, artifacts/stashes, parallel stages, post actions, parameters, and approvals. Keep Jenkinsfiles under review; treat shared libraries and plugins as executable dependencies. Set timeouts and cleanup. Promote the same artifact across environments.
+
+**Troubleshooting:** build queued—agent labels, executors, node offline state, and cloud capacity; checkout fails—credential scope, branch/ref, network and host keys; credential unavailable—folder/job scope and binding; controller unstable—disk, heap, plugin compatibility, queue, and thread/agent load.
+
+**Revision:** controller orchestrates; agent executes; credential masking is not isolation; a trusted PR build differs from a fork; plugin count increases attack/upgrade surface; immutable artifacts make promotion and rollback auditable.

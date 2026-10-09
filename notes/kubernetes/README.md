@@ -21,3 +21,25 @@ Deploy a small app with two replicas, probes, resource settings, internal Servic
 ## Further reading
 
 [Kubernetes documentation](https://kubernetes.io/docs/) · [Security checklist](https://kubernetes.io/docs/concepts/security/)
+
+## Topic roadmap and diagnostic flow
+
+**Control plane:** API server validates requests; etcd stores cluster state; scheduler assigns unscheduled Pods; controllers reconcile desired state; kubelet runs workloads on nodes. Managed services operate some components, not application-level correctness.
+
+```mermaid
+flowchart LR
+  GIT[Reviewed manifests] --> CI[Validate / scan]
+  CI --> API[Kubernetes API]
+  API --> CTRL[Controllers]
+  CTRL --> SCH[Scheduler]
+  SCH --> NODE[Node kubelet + Pods]
+  SVC[Service] --> PODS[Ready Pod endpoints]
+```
+
+**Workloads/network/storage:** Deployment/ReplicaSet for stateless replicas; StatefulSet for stable identity; DaemonSet per eligible node; Job/CronJob for finite tasks. Service selects endpoints; DNS supports discovery; Ingress/Gateway needs a controller. PVC binds storage. ConfigMaps are non-secret configuration; Secrets require RBAC and encryption/access protections.
+
+**Example:** define two replicas, resource requests, readiness/startup probes, PodDisruptionBudget, topology spread, and a rolling update strategy. Use NetworkPolicy only after confirming the cluster CNI enforces it.
+
+**Troubleshooting:** `Pending`—events, requests/quota, node selectors/taints and PVC; `CrashLoopBackOff`—previous logs, command/config/probe failures; Service has no endpoints—selector, Pod labels, readiness; `ImagePullBackOff`—image reference, registry auth, network; rollout stalls—events, readiness, capacity, and `kubectl rollout status/history`.
+
+**Revision:** request schedules; limit caps; readiness gates traffic; liveness restarts; startup delays other probes; Service is stable discovery, not a process; namespace is organization, not sufficient isolation; reconcile manifests and avoid unmanaged production edits.

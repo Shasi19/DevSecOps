@@ -33,4 +33,25 @@ Write a CLI that checks a service endpoint, validates a response schema, retries
 
 ## Further reading
 
-[Python documentation](https://docs.python.org/3/) · [ subprocess](https://docs.python.org/3/library/subprocess.html)
+[Python documentation](https://docs.python.org/3/) · [subprocess](https://docs.python.org/3/library/subprocess.html)
+
+## Topic roadmap and example
+
+**Core topics:** interpreter/environment, modules and packaging, data structures, exceptions, context managers, iterators, type hints, logging, testing, HTTP/API clients, JSON/YAML parsing, filesystem/process automation, and dependency management. Keep credentials outside config files and avoid logging request headers or payload secrets.
+
+**API automation flow:**
+
+```mermaid
+flowchart LR
+  CLI[Validate CLI input] --> AUTH[Load scoped identity]
+  AUTH --> REQ[Request with timeout]
+  REQ --> CHECK[Check status + schema]
+  CHECK --> ACTION[Idempotent action]
+  ACTION --> LOG[Structured result + exit code]
+```
+
+Validate external data at boundaries. Distinguish network timeout, HTTP error, malformed JSON, and schema mismatch. Retry only transient conditions (for example selected 429/5xx responses) with bounded exponential backoff and jitter; respect `Retry-After`. Do not blindly retry non-idempotent operations.
+
+**Troubleshooting:** `ModuleNotFoundError`—confirm interpreter/venv and installed project; subprocess hangs—timeout and capture output carefully; Unicode error—inspect encoding boundary; API 403—identity/scope differs from network failure; duplicate changes—operation lacks idempotency key/state check.
+
+**Revision:** exceptions are control flow only when handled specifically; subprocess argument list avoids shell parsing; timeouts bound work; logs need redaction; a retry policy needs limits and idempotency; unit tests mock boundaries, integration tests verify real contracts.

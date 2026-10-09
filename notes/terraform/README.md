@@ -25,3 +25,23 @@ Provision a minimal network and workload in a sandbox. Review a plan containing 
 ## Further reading
 
 [Terraform documentation](https://developer.hashicorp.com/terraform/docs) · [State](https://developer.hashicorp.com/terraform/language/state)
+
+## Topic roadmap, example, and plan diagnosis
+
+**Language:** providers configure APIs; resources create/manage objects; data sources read existing objects; variables define inputs; locals name derived values; outputs expose selected results; modules package reusable configuration. Dependencies usually derive from references; explicit `depends_on` is for hidden ordering requirements, not a default.
+
+```mermaid
+flowchart LR
+  CFG[Versioned configuration] --> INIT[init: providers + modules]
+  INIT --> PLAN[plan: desired vs state/remote]
+  PLAN --> REVIEW[Human / policy review]
+  REVIEW --> APPLY[apply approved plan]
+  APPLY --> API[Cloud APIs]
+  API --> STATE[Locked remote state]
+```
+
+**Example:** pin a provider range and commit `.terraform.lock.hcl`; store state in a remote backend with encryption, access control, versioning/backup, and locking. A workspace is not automatically an environment security boundary. Use separate state/backends or accounts when stronger blast-radius separation is needed.
+
+**Troubleshooting:** perpetual diff—provider normalization, unstable computed values, or external drift; lock timeout—identify active run and backend lease before force-unlocking; replacement plan—inspect `forces replacement` attributes, lifecycle rules, and data impact; missing resource in state—check workspace/backend/credentials before importing.
+
+**Revision:** configuration describes; state maps; plan previews; apply mutates; lock prevents concurrent state operations; sensitive output redaction does not remove values from state; import associates existing object; `moved` preserves address changes; target is exceptional recovery, not routine deployment.

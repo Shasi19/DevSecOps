@@ -29,3 +29,24 @@ Containerize a service with a multi-stage build, non-root runtime, health endpoi
 ## Further reading
 
 [Docker documentation](https://docs.docker.com/)
+
+## Topic roadmap and operating example
+
+**Images and builds:** Dockerfile instructions form layers; build context determines which local files are sent to the builder. Multi-stage builds separate compile-time dependencies from runtime. `.dockerignore`, pinned base images, BuildKit secret mounts, and cache policy affect security and reproducibility.
+
+**Runtime:** namespaces/isolation and cgroups/resource controls constrain processes; port publishing exposes listeners; bind mounts connect host paths while volumes persist Docker-managed data. Containers are ephemeral—persist only explicitly. A health check reports status but does not automatically repair every failure.
+
+```mermaid
+flowchart LR
+  SRC[Source + lockfiles] --> BUILD[Multi-stage build]
+  BUILD --> SCAN[Scan + SBOM]
+  SCAN --> REG[Registry: immutable digest]
+  REG --> RUN[Runtime: non-root + limits]
+  RUN --> LOG[stdout/stderr + metrics]
+```
+
+**Example:** production deployment uses `registry.example/app@sha256:...`; config and secrets are injected at runtime, with a read-only root filesystem where compatible.
+
+**Troubleshooting:** container exits—inspect exit code, logs, entrypoint, and signal handling; cannot bind port—check app bind address (often `0.0.0.0` inside container), published port, and host conflict; image unexpectedly large—inspect layers, build context, and multi-stage separation; permission denied—check UID/GID and mounted-volume ownership.
+
+**Revision:** image is a template, container is a process; `EXPOSE` documents but does not publish; a tag is mutable; secrets in build args/layers persist; volume data and image lifecycle differ; container isolation shares the host kernel.

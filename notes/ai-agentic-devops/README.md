@@ -25,3 +25,26 @@ Prototype a read-only incident assistant that summarizes alerts and links runboo
 ## Further reading
 
 [OWASP Top 10 for LLM Applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/) · [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)
+
+## Topic roadmap, architecture, and failure handling
+
+**Components:** model, system/developer instructions, user input, retrieval/index, tool registry, policy/approval layer, execution sandbox, audit log, and evaluator. RAG retrieves context but does not make it trusted or authoritative. Tool output and retrieved tickets/logs may contain prompt injection.
+
+```mermaid
+flowchart LR
+  USER[Request] --> GATE[Auth + task policy]
+  GATE --> RET[Scoped retrieval]
+  RET --> MODEL[Model proposes plan]
+  MODEL --> CHECK[Schema + policy validation]
+  CHECK --> HUMAN[Approval for high impact]
+  HUMAN --> TOOL[Least-privilege tool]
+  TOOL --> AUDIT[Audit + outcome]
+```
+
+**Example:** an incident assistant may read alerts, service catalog, and approved runbooks, then suggest a command. A separate tool validates an allowlisted action and requires human approval before mutation. Never let model text directly become shell or SQL.
+
+**Evaluation:** create representative and adversarial test sets; measure factual grounding, safe refusal, tool correctness, latency/cost, and leakage. Test poisoned documents, indirect prompt injection, malformed outputs, tool outages, and repeated-agent loops. Limit context, tool calls, runtime, and budget.
+
+**Troubleshooting:** fabricated answer—check retrieval freshness/source citations; unsafe tool request—policy deny and record; repeated loop—step/cost/time ceiling; data leakage—review retrieval ACL propagation, prompt logging, provider retention, and output redaction.
+
+**Revision:** model output is untrusted; retrieval is not authorization; tools need independent permission checks; approval is for high impact; deterministic policy enforces safety; audit inputs, decisions, actions, and results with sensitive-data controls.

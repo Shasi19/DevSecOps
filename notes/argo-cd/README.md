@@ -21,3 +21,23 @@ Deploy a sample app from Git, make an intentional live drift, and observe reconc
 ## Further reading
 
 [Argo CD documentation](https://argo-cd.readthedocs.io/en/stable/)
+
+## Topic roadmap and GitOps example
+
+**Core resources:** Application identifies repo/path/revision and destination; AppProject restricts allowed sources, destinations, and resource kinds; repo-server renders manifests; application controller compares desired and live state; sync applies changes; health assessment reports resource status. App-of-apps and ApplicationSets scale fleet configuration but increase the importance of safe source governance.
+
+```mermaid
+flowchart LR
+  PR[Manifest pull request] --> REVIEW[Review + CI validation]
+  REVIEW --> GIT[Protected Git revision]
+  GIT --> CTRL[Argo CD reconcile]
+  CTRL --> K8S[Kubernetes API]
+  K8S --> HEALTH[Health + sync status]
+  HEALTH --> ALERT[Notify operator]
+```
+
+**Sync and drift:** automated sync, prune, and self-heal are separate decisions. Prune can delete resources; enable it only with ownership and deletion safeguards. Sync waves/hooks support ordering but should not replace readiness and rollback design. Secrets need encryption/secret-manager integration; do not commit cleartext.
+
+**Troubleshooting:** `OutOfSync`—compare rendered desired and live diff, check ignored fields/controllers; `Unknown`—repo rendering, API/RBAC, or connectivity; `Healthy` but app broken—health checks may not capture user SLO; repeated sync failure—inspect admission errors, ownership conflicts, immutable fields, and sync permissions.
+
+**Revision:** Git defines desired state; controller reconciles; sync status is not health; health is not an SLO; prune is destructive; revert Git for auditable rollback; protect the repo and Argo control plane as deployment authorities.

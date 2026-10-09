@@ -23,3 +23,27 @@ Build a small training pipeline with schema checks, experiment tracking, a model
 ## Further reading
 
 [MLflow documentation](https://mlflow.org/docs/latest/) · [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework)
+
+## Topic roadmap and ML delivery architecture
+
+**Lifecycle topics:** data contracts/validation, feature engineering/store, experiment tracking, training orchestration, evaluation, model registry, packaging, serving, monitoring, retraining, governance, and retirement. Track code, data/version, features, parameters, environment, model artifact, evaluation, and approval together.
+
+```mermaid
+flowchart LR
+  DATA[Versioned data] --> VALID[Validation]
+  VALID --> TRAIN[Training + experiment tracking]
+  TRAIN --> EVAL[Evaluation / fairness gates]
+  EVAL --> REG[Model registry]
+  REG --> DEP[Batch or online serving]
+  DEP --> MON[Latency + quality + drift]
+  MON --> REVIEW[Human / policy review]
+  REVIEW --> TRAIN
+```
+
+**Example:** register only a candidate that passes a reproducible offline evaluation and data-quality checks. Deploy by immutable model version to shadow/canary, compare business and safety metrics, then promote or roll back. Retraining should create a candidate, not automatically authorize production.
+
+**Monitoring:** input schema/null/range checks, training-serving skew, feature freshness, prediction distribution, delayed-label quality, fairness slices, latency/error/cost, and drift. Drift is a signal to investigate—not proof of model degradation.
+
+**Troubleshooting:** training result irreproducible—missing data/code/environment version; serving mismatch—feature transformation skew; accuracy drop—label delay, cohort shift, pipeline bug or concept drift; model unavailable—artifact permissions, runtime compatibility, capacity and health checks.
+
+**Revision:** model != full ML system; registry records candidates; data lineage matters; offline quality != online impact; monitor both system and model; rollback to known model; re-training must be governed and evaluated.
