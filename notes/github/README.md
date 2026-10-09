@@ -60,6 +60,10 @@ flowchart LR
 
 A PR changes deployment YAML and CI permissions. Review the proposed cloud resources, destructive updates, workflow events, token permissions, third-party actions, secret exposure, artifact source, and production path. Require a plan/status check generated from the exact PR revision. If an untrusted fork can modify a workflow that receives secrets or write tokens, halt the release path and remove that privilege before merging.
 
+## End-to-end repository setup
+
+See [`process.md`](process.md) for repository creation, protected branch setup, CODEOWNERS, Actions permissions, release publication, and emergency access review.
+
 ## Revision
 
 Branch rules govern merges, not runtime cloud access; CODEOWNERS routes review but does not enforce least privilege; environment approval does not make a malicious workflow safe; token permission should be explicit; releases need artifact-to-commit provenance.

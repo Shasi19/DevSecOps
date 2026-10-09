@@ -52,3 +52,7 @@ An Elasticsearch index template should explicitly map fields used for filters/ag
 ## Incident scenario: disk watermark
 
 Stop uncontrolled ingest growth first. Inspect node disk, shard allocation, index growth, retention/lifecycle execution, and oversized fields. Do not delete indices blindly. Confirm snapshot status and retention requirements, then add capacity or safely expire approved data. Rebalance and verify cluster health/search/indexing recovery; record bytes and recovery duration.
+
+## End-to-end log pipeline process
+
+See [`process.md`](process.md) for source onboarding, parsing/mapping, lifecycle setup, Kibana dashboards/alerts, snapshots, troubleshooting, and source offboarding.

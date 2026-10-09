@@ -9,13 +9,31 @@ variable "region" {
   default     = "us-central1"
 }
 
-variable "subnet_cidr" {
-  description = "Non-overlapping RFC1918 range reserved for this lab."
-  type        = string
-  default     = "10.42.0.0/24"
+variable "subnets" {
+  description = "Subnets keyed by stable logical name; do not use generated IDs as keys."
+  type = map(object({
+    cidr   = string
+    region = string
+  }))
+  default = {
+    app = {
+      cidr   = "10.42.0.0/24"
+      region = "us-central1"
+    }
+    data = {
+      cidr   = "10.42.1.0/24"
+      region = "us-central1"
+    }
+  }
 
   validation {
-    condition     = can(cidrhost(var.subnet_cidr, 0))
-    error_message = "subnet_cidr must be a valid CIDR range."
+    condition     = alltrue([for subnet in values(var.subnets) : can(cidrhost(subnet.cidr, 0))])
+    error_message = "Every subnet cidr must be a valid CIDR range."
   }
+}
+
+variable "allow_health_check_ingress" {
+  description = "Create a narrowly targeted health-check firewall rule for backend VMs tagged web-backend."
+  type        = bool
+  default     = false
 }

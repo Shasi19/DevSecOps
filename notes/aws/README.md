@@ -45,4 +45,8 @@ Establish account/identity guardrails; design network and workload permissions; 
 
 **Revision:** account is a useful security/billing boundary; SCP constrains but does not grant; role trust differs from permissions; security groups are stateful and NACLs stateless; NAT is egress; multi-AZ is not a backup; CloudTrail is not application telemetry.
 
+## Create and operate a VM
+
+For EC2 use cases, prerequisites, a private launch command, Session Manager access, verification, troubleshooting, and termination checks, follow [`vm-instance.md`](vm-instance.md).
+
 **Official references:** [AWS Well-Architected Framework](https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html) · [IAM best practices](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html)

@@ -45,3 +45,7 @@ flowchart LR
 ## Jenkinsfile example
 
 See [`examples/Jenkinsfile`](examples/Jenkinsfile). It validates the notes repository with explicit timeouts and workspace cleanup; it does not pretend to build or deploy an application. Configure the controller to use isolated ephemeral agents. Add app-specific build, artifact allowlisting/scanning, and a separate protected deployment stage only after short-lived identity and environment approval are configured. The agent label must match your managed environment.
+
+## End-to-end Jenkins process
+
+See [`process.md`](process.md) for controller/agent setup, credential separation, pipeline creation, artifact promotion, production approval, recovery, and controller backup/upgrade operations.

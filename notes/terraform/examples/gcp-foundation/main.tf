@@ -19,14 +19,18 @@ resource "google_compute_network" "app" {
 }
 
 resource "google_compute_subnetwork" "app" {
-  name                     = "devsecops-lab-private"
-  ip_cidr_range            = var.subnet_cidr
-  region                   = var.region
+  for_each = var.subnets
+
+  name                     = "devsecops-lab-${each.key}"
+  ip_cidr_range            = each.value.cidr
+  region                   = each.value.region
   network                  = google_compute_network.app.id
   private_ip_google_access = true
 }
 
 resource "google_compute_firewall" "allow_health_check" {
+  count = var.allow_health_check_ingress ? 1 : 0
+
   name      = "devsecops-lab-health-check"
   network   = google_compute_network.app.name
   direction = "INGRESS"

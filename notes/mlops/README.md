@@ -51,3 +51,7 @@ flowchart LR
 ## Reproducible experiment lab
 
 See [`examples/train.py`](examples/train.py) for a small MLflow-tracked classification experiment. It demonstrates deterministic split, metrics, parameters, and artifact logging only. It is not a production training pipeline: add versioned input data, schema/quality checks, dependency lock, model card, fairness/security evaluation, registry approval, and deployment/monitoring gates before reuse.
+
+## End-to-end MLOps process
+
+See [`process.md`](process.md) for data contract/versioning, experiment creation, evaluation gates, model registration, deployment/canary, monitoring, rollback, and retraining approval.

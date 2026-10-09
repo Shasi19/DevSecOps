@@ -46,3 +46,7 @@ flowchart LR
 ## Java/TestNG example project
 
 See [`examples/java-testng/`](examples/java-testng/) for a Maven test with explicit wait, per-test browser lifecycle, optional Selenium Grid, and failure screenshot. It expects an application contract: a page element with `data-testid="service-status"` and accessible text `ready`. Adapt locators to your app. Screenshots may contain customer data; retain them only under approved CI artifact controls.
+
+## End-to-end browser-test process
+
+See [`process.md`](process.md) for environment/test-data preparation, browser/Grid startup, deterministic test execution, failure artifacts, CI triage, flake reduction, and cleanup.

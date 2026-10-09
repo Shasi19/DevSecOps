@@ -53,3 +53,7 @@ Build a service-level dashboard around request count, error ratio, latency perce
 ## Production rollout checklist
 
 Roll out agents/integrations to a canary host pool first. Measure CPU/memory/network overhead, verify process/service topology and data completeness, then expand by environment. Pin supported agent versions and test upgrades. Establish proxy/egress allowlists, API-token rotation, privacy filters, data retention, and a procedure for agent outage. Keep a telemetry gap visible as an incident condition.
+
+## End-to-end onboarding process
+
+See [`process.md`](process.md) for service discovery, canary agent rollout, entity/service ownership, dashboards/alerts, incident triage, and safe offboarding.

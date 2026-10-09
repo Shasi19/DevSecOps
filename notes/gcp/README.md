@@ -62,3 +62,7 @@ The diagram is a reference pattern, not a universal topology. Cloud Run, GKE, an
 | End-to-end exercise | [Production lab](production-lab.md) |
 
 **Revision:** projects are useful policy/quota/billing units; VPC is global but subnets are regional; IAM grants access while organization policy constrains; service-account federation avoids long-lived CI keys; private networking does not replace authorization; HA does not replace restore tests.
+
+## Create and operate a VM
+
+For the Compute Engine use case decision, sandbox setup, private `gcloud` creation, IAP/OS Login connection, verification, troubleshooting, and cleanup, follow [`vm-instance.md`](vm-instance.md).

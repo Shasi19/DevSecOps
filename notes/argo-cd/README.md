@@ -45,3 +45,7 @@ flowchart LR
 ## Minimal staged Application example
 
 See [`examples/application.yaml`](examples/application.yaml). It is a template with a reserved example repository URL; replace the repository, path, revision, project, and destination after creating a restrictive AppProject. Auto-sync is enabled but prune is disabled intentionally. Review all rendered manifests and test in staging before enabling any destructive reconciliation.
+
+## End-to-end GitOps application process
+
+See [`process.md`](process.md) for repository bootstrap, AppProject boundaries, application registration, sync/health gates, drift response, rollback, and deletion safeguards.

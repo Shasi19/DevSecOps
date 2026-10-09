@@ -64,3 +64,7 @@ See [`examples/ci.yml`](examples/ci.yml). It runs tests with a read-only token a
 ## Webhook receiver controls
 
 For a webhook receiver, verify the provider's signature against the **exact raw request bytes** before parsing JSON, using a constant-time comparison. Enforce body-size limits, validate event type and schema, and durably enqueue before returning success. Persist delivery IDs to deduplicate retries; signatures authenticate origin/integrity but do not prevent replay. Keep the secret in a secret manager, rotate it, avoid logging payloads, and verify current repository/installation permissions before taking actions.
+
+## End-to-end workflow setup
+
+See [`process.md`](process.md) for workflow creation, least-privilege permission selection, validation, artifact promotion, protected deployment, and fork-PR testing.

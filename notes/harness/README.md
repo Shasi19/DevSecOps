@@ -54,3 +54,7 @@ Before enabling a pipeline, document the source branch/event trust level, build 
 Check whether the step's exit status represents only API acceptance or actual workload readiness. Verify deployment status, target health, application error/latency signals, and new revision traffic. If service SLO regresses, halt later stages and use a documented rollback to the exact previous artifact. Do not retry non-idempotent migration/deployment steps automatically.
 
 Review delegate permissions independently from connector permissions. A delegate with broad network reach or a reusable privileged token can exceed the intended scope of a single pipeline.
+
+## End-to-end Harness pipeline process
+
+See [`process.md`](process.md) for connector/delegate setup, service/environment modeling, pipeline creation, artifact promotion, approval/verification, failure response, and secret/credential cleanup.

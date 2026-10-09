@@ -47,3 +47,7 @@ flowchart LR
 ## Production manifest lab
 
 See [`examples/secure-web/`](examples/secure-web/) for a Deployment, internal Service, PodDisruptionBudget, and default-deny NetworkPolicy, with run instructions and failure exercises. The sample assumes a specific port and health endpoint; adapt these to the application. NetworkPolicy enforcement depends on the cluster CNI, and a deny-all policy can break DNS/dependencies unless explicit rules are added.
+
+## End-to-end workload process
+
+See [`process.md`](process.md) for cluster prerequisites, namespace/security setup, Deployment/Service creation, rollout verification, incident rollback, and safe resource cleanup.

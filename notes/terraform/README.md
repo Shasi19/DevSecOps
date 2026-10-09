@@ -49,3 +49,11 @@ flowchart LR
 ## GCP foundation lab
 
 See [`examples/gcp-foundation/`](examples/gcp-foundation/) for a plan-only VPC/subnet/firewall example with typed variables and a required review step. It assumes an existing sandbox project and intentionally does not run apply. It is a learning module, not a landing zone; production also requires governed remote state, IAM, audit, policies, quotas, and network ownership.
+
+## Terraform language patterns
+
+See [`language-patterns.md`](language-patterns.md) for fully worked `count`, `for_each`, conditional resources, module iteration, dynamic nested blocks, lifecycle, and safe resource-address migrations. Use it alongside the end-to-end [`process.md`](process.md).
+
+## End-to-end infrastructure process
+
+See [`process.md`](process.md) for module design, backend setup, CI permissions, plan review, apply, drift/import recovery, and teardown.

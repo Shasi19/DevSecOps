@@ -49,3 +49,7 @@ flowchart LR
 **Troubleshooting:** connection refused usually means no listener or active rejection; timeout suggests path/filter/drop or unresponsive target; DNS failure precedes TCP; permission denied requires checking user, path traversal permissions, mount flags, ACLs, and SELinux/AppArmor.
 
 **Revision:** process != service; load != CPU; free disk != free inodes; DNS, routing, firewall, listener, TLS, and app response are separate layers; collect evidence before restarting.
+
+## End-to-end host administration process
+
+Follow [`process.md`](process.md) for a repeatable host onboarding, service deployment, health verification, incident diagnosis, and decommission procedure.

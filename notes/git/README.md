@@ -71,3 +71,7 @@ Before opening a pull request, run targeted tests, confirm no generated files/se
 ## Secret exposure response
 
 If a credential enters a commit: revoke/rotate immediately, assess access logs and scope, remove it from active code/history where appropriate, notify the security owner, and prevent recurrence with secret scanning. History rewrite does not invalidate a credential or erase clones/caches. Do not wait for a history cleanup before rotation.
+
+## End-to-end team workflow
+
+See [`process.md`](process.md) for the issue-to-release process, required review/test gates, conflict recovery, rollback, and leaked-secret response.

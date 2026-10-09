@@ -69,3 +69,7 @@ Validate configuration before reload in real deployments (for example, with a mo
 ## Production web-server role example
 
 See [`examples/`](examples/) for an inventory-free playbook and template. The example is Debian-family specific and intentionally targets a lab host group. First inspect with `--check --diff`; use a disposable VM, then validate the rendered NGINX config before enabling the service. For production, pin Ansible/collection versions, use controlled inventory, SSH host-key verification, and an approved secret manager.
+
+## End-to-end configuration rollout
+
+See [`process.md`](process.md) for inventory/credential setup, idempotent role development, staged rollout, drift verification, rollback, and secret-safe operation.
